@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Data Management for Scientists</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- CSS - font, bootstrap, syntax, custom -->
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">patrick fuller's blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Data Management for Scientists</h2>
+<p class="meta">17 Jul 2012</p>
+
+<div class="post">
+<p><img src="/img/binary.png" alt=""></p>
+
+<p>I&#39;ve spent the last few months working with the folks at Codecademy to create a
+<a href="http://www.codecademy.com/courses/4fa071f79953310003008791?">tutorial</a> targeted
+at experimentalists. It covers what I have found to be the most commonly-encountered-but-easily-solvable
+problem in experimental science: data management. Especially with older machines,
+data is often generated in non-ideal formats. The data might present itself in
+obscure text files, or maybe you only need every <em>n</em>th datapoint. Regardless, the
+usual solution that I&#39;ve seen is for a scientist to spend hours manually copying
+and pasting important information. Not only is this dangerous - translational errors
+are a real thing - but it&#39;s miserably boring.</p>
+
+<p>This issue came up in the work behind one of my earlier papers. In one set of
+experiments, we wanted to view the motion of a single dye molecule in various
+metal-organic framework crystals. Amazingly, this task can be accomplished through
+an approach called <a href="http://en.wikipedia.org/wiki/Fluorescence_correlation_spectroscopy">fluorescence correlation spectroscopy</a>,
+or FCS. This method can monitor the fluorescence intensity of a small volume (think
+sub-micron) over time, providing information on flow. In a very dilute system,
+the approach can monitor the volume around single molecules, which allows us to
+extrapolate data on different time scales - we can observe Brownian motion, adsorption
+kinetics, and diffusion.</p>
+
+<p>The resultant data of a set of experiments comes out looking like
+<a href="https://dl.dropboxusercontent.com/u/5295849/sample_mof_data.fcs">this large text file</a>
+(I don&#39;t know if I have rights to the raw data, so I&#39;ve mangled the values. I have,
+however, attempted to keep the underlying trends the same.). We needed to autocorrelate
+the data and fit to models to ascertain diffusion and adsorption coefficients, but
+we obviously couldn&#39;t do that in its current form. We moved the data to Excel using
+the approach described in the Codecademy tutorial, and were then able to fit our
+models. Victory.</p>
+
+<p>If anyone has any questions or comments about the Codecademy tutorial or the underlying
+FCS experiments, feel free to ask!</p>
+
+</div>
+
+<!-- Disqus comments -->
+<script type="text/javascript">
+  var disqus_shortname = 'patrickfuller';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- MathJax LaTeX editor, with edits from http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+          <div id="disqus_thread"></div>
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                <a href="mailto:patrickfuller@gmail.com"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/patrickfuller"><i class="fa fa-github"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    <!-- Javascript -->
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

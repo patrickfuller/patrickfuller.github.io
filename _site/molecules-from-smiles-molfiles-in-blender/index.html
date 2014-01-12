@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Molecules in Blender</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- CSS - font, bootstrap, syntax, custom -->
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">patrick fuller's blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Molecules in Blender</h2>
+<p class="meta">26 Jun 2012</p>
+
+<div class="post">
+<p><img src="/img/penicillin_in_marble.png" alt=""></p>
+
+<p><strong>tl;dr:</strong> <em>Source code containing all of this and much more can be found
+<a href="https://github.com/patrickfuller/blender-chemicals">on github</a>. Follow the readme
+to use.</em></p>
+
+<p>As a whole, science and technology have made incredible advancements in aesthetics.
+Programming presentations are <a href="http://www.patrick-fuller.com/pycon-2012/">succinct</a>,
+biologists have made videos like <a href="http://www.youtube.com/watch?v=wJyUtbn0O5Y">this</a>
+and <a href="http://www.youtube.com/watch?v=NjgBnx1jVIU">this</a>, and physicists can point
+to, like, every image of space ever taken.</p>
+
+<p>However, most chemistry graphics look like they were thrown together by a toddler.
+I understand the sentiment behind this: &quot;it&#39;s the science that matters&quot;, &quot;I can&#39;t
+waste time learning how to do this&quot;, blah blah blah. While that&#39;s kind of true,
+no one will even <em>read</em> your paper if it has these graphics. Seriously, anything
+short of a cure for cancer will be skimmed over if it isn&#39;t visually appealing.
+You&#39;ve spent months to years working toward a paper; you can afford yourself a
+week or two to make your graphics not look like crap.</p>
+
+<p>As my inaugural scientific visualization post, let&#39;s start with one of the most
+common visualization tasks for chemists. I will show you how to easily draw any
+molecule in blender.</p>
+
+<h2>What people are doing</h2>
+
+<p>The typical approach involves Powerpoint (or Photoshop/GIMP for the more artistically
+inclined) and a program already in their workflow (e.g. JMol, Mercury, etc.).
+This approach is easy to learn and produces graphics that meet the industry standard.
+Let&#39;s take an example molecule - caffeine - and work through the process.</p>
+
+<p>First, we get the molecular structure from wikipedia or the nearest nerdy coffee
+mug (ie. why I chose this example). It looks like this:</p>
+
+<p><img src="/img/caffeine.png" alt=""></p>
+
+<p>Next, we download a chemical program (in this case, JMol) and render the structure.
+This gives us:</p>
+
+<p><img src="/img/caffeine_jmol.png" alt=""></p>
+
+<p>From here, we make the black background transparent and copy and paste it around
+a coffee mug or something.</p>
+
+<p><img src="/img/coffee.png" alt=""></p>
+
+<p>Now, you submit this graphic to <em>Nature</em> or <em>Science</em> with your manuscript. When
+you get your reviewer comments, there&#39;s a good chance they will be harsh and
+almost nonsensical. Why? Because no one actually read your work. They saw no pretty
+pictures, which means they didn&#39;t read any of it in depth, which then caused the
+aforementioned comments. It&#39;s not fair by any means, but you can&#39;t really blame
+them. It&#39;s exactly what you would do if you were told to critique a pile of
+manuscripts.</p>
+
+<h2>A better approach</h2>
+
+<p>Here&#39;s the core problem: most molecule viewers are designed for day-to-day
+chemistry work, not graphics rendering. Using these programs for cover art is
+like trying to hammer in a screw (it&#39;ll work, but your result&#39;s going to suck).
+What we need is a high-powered program designed for computer graphics rendering,
+and then a simple means to add molecular structures into it.</p>
+
+<p>Enter <a href="http://www.blender.org/">blender</a>, an open-source 3D modeling program with
+an amazingly active community of developers and users. With training, it can be
+used to create <a href="http://www.youtube.com/watch?v=QbzE8jOO7_0&amp;hd=1">movie-quality computer graphics</a>.
+With almost no training, it can still produce scientific visualizations orders of
+magnitude better than what&#39;s currently out there. The best part is its incredibly
+organized Python API, which makes it easy to add in our own logic and automate
+repetitive tasks.</p>
+
+<p>Blender works like most 3D graphical editors. We draw primitive objects (ie. spheres,
+cylinders, etc.), overlay them with materials and textures, and adjust our viewport
+and lighting. In order to draw molecules without adding shapes by hand, we need
+to use Python for some heavy automation.</p>
+
+<h2>Parsing molecules</h2>
+
+<p>First, let&#39;s look into how we will want to specify chemical structures. The world
+of chemistry is littered with terrible file formats, and, due to the general resilience
+of legacy standards, we will need to consider them. Before we get to that, however,
+let&#39;s decide upon a good extensible representation of molecular data. The common
+representation used in coding is called <em>JavaScript Object Notation</em>, or <em>json</em>,
+and it is very good at succinctly representing arbitrary data. If you&#39;ve never
+heard of it before, I highly recommend reading up on it before continuing.
+<a href="http://en.wikipedia.org/wiki/JSON">Here&#39;s the wiki</a>.</p>
+
+<p>As molecules are a subset of &quot;arbitrary data&quot;, json should suit our needs. Our
+drawer will need atom element types and 3D locations, and bond connections and
+orders. Therefore, let&#39;s use something like shown below (the example is for ethane).</p>
+<div class="highlight"><pre><code class="json language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;atoms&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nt">&quot;element&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.252</span><span class="p">,</span> <span class="mf">-0.116</span><span class="p">,</span> <span class="mf">-0.704</span> <span class="p">]</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nt">&quot;element&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">-0.252</span><span class="p">,</span> <span class="mf">0.116</span><span class="p">,</span> <span class="mf">0.704</span> <span class="p">]</span> <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;bonds&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nt">&quot;atoms&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span> <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This is easy to parse in Python - <code>import json; data = json.loads(string)</code>.
+In two lines, we now have a Python data structure! If we wanted to print, say,
+the y coordinate of the first atom, we could do so with
+<code>print(data[&quot;atoms&quot;][0][&quot;location&quot;][1])</code>. This will come in handy later.</p>
+
+<p>Now, back to the matter at hand. We want to offer support for the hundreds of
+file formats out there (molfiles, smiles, sdf, cif, pdb, etc.), but parsing them
+all is an absolute nightmare. In a previous version of this post, I recommended
+parsing a molfile directly. I now take that back. That was stupid. Let&#39;s use Pybel,
+a Python wrapper on the <a href="http://openbabel.org/wiki/Main_Page">openbabel</a> library.
+Download it, and then we can unify all of these file formats in one line of code
+- <code>molecule = pybel.readstring(format, string)</code>. If there is no positional data
+in the input file format, we can generate it by simply calling <code>molecule.make3D()</code>.</p>
+
+<p>Now, if we can convert this unified format to json, we will have a unified data
+format without needing to write any more parsing logic.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="k">def</span> <span class="nf">molecule_to_json</span><span class="p">(</span><span class="n">molecule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts an OpenBabel molecule to json for use in Blender.&quot;&quot;&quot;</span>
+
+    <span class="c"># Save atom element type and 3D location.</span>
+    <span class="n">atoms</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;element&quot;</span><span class="p">:</span> <span class="n">atom</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+              <span class="s">&quot;location&quot;</span><span class="p">:</span> <span class="n">atom</span><span class="o">.</span><span class="n">coords</span><span class="p">}</span>
+             <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">molecule</span><span class="o">.</span><span class="n">atoms</span><span class="p">]</span>
+
+    <span class="c"># Save number of bonds and indices of endpoint atoms</span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;atoms&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">b</span><span class="o">.</span><span class="n">GetBeginAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetIndex</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">GetEndAtom</span><span class="p">()</span><span class="o">.</span><span class="n">GetIndex</span><span class="p">()],</span>
+              <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="n">b</span><span class="o">.</span><span class="n">GetBondOrder</span><span class="p">()}</span>
+             <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">openbabel</span><span class="o">.</span><span class="n">OBMolBondIter</span><span class="p">(</span><span class="n">molecule</span><span class="o">.</span><span class="n">OBMol</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s">&quot;atoms&quot;</span><span class="p">:</span> <span class="n">atoms</span><span class="p">,</span> <span class="s">&quot;bonds&quot;</span><span class="p">:</span> <span class="n">bonds</span><span class="p">})</span>
+</code></pre></div>
+<p>There is some additional messiness in the github repository to handle corner cases,
+but this function should generally work.</p>
+
+<p>Converting from the molecule object to json will help us out in many ways. For
+example, we can test the quality of our file format converter without even needing
+to involve blender (it&#39;s better to debug code in isolated chunks than it is to
+debug the whole thing). If you want to cross-check your work, load your file into
+<a href="http://www.patrick-fuller.com/imolecule.html">imolecule</a>. If your json is invalid,
+this tool will print an error. And, if you want to skip format conversion logic
+entirely, click the &quot;save as&quot; button in the window. Cool, right?</p>
+
+<p>Remembering that the task at hand was to create a caffeine molecule, let&#39;s do so.
+I&#39;m partial to the SMILES representation of small molecules, which can be found
+all over the internet. Caffeine&#39;s SMILES is <em>O=C1C2=C(N=</em><wbr /><em>CN2C)N(C(=O)N1C)C</em>,
+which can be loaded directly into our pipeline.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pybel</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">molecule</span> <span class="o">=</span> <span class="n">pybel</span><span class="o">.</span><span class="n">readstring</span><span class="p">(</span><span class="s">&quot;smi&quot;</span><span class="p">,</span> <span class="s">&quot;O=C1C2=C(N=CN2C)N(C(=O)N1C)C&quot;</span><span class="p">)</span>
+<span class="n">molecule</span><span class="o">.</span><span class="n">make3D</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;caffeine.json&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+    <span class="n">out_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">molecule_to_json</span><span class="p">(</span><span class="n">molecule</span><span class="p">))</span>
+</code></pre></div>
+<p>This will create a file called &quot;caffeine.json&quot; that will reflect the json example
+shown above. (Note: in the sample code shown here, the json will be printed on
+one line without most of its whitespace. If you want to add whitespace back in,
+add <code>indent=4</code> to the <code>json.dumps</code> method in the converter.)</p>
+
+<p>With a single data format and no more need of external libraries, we are ready to
+use Blender!</p>
+
+<h2>Python in Blender</h2>
+
+<p>Using Python in Blender requires a bit of explanation. While its API is through a
+Python package, this library only works in Blender&#39;s own script editor (there are
+workarounds that I&#39;m not getting in to; let&#39;s use Blender the way the developers
+intended). Rather than thinking of Blender as a Python library, think of Python
+like a feature of Blender. Backwards, I know, but it makes sense when you start
+using it. Start up Blender, click and drag the top right tab to create multiple
+windows, and then select the text editor. Repeat to add in a Python console.</p>
+
+<p><img src="/img/blender_screenshot.png" alt=""></p>
+
+<p>That&#39;s it. You have your Python editor directly in Blender.</p>
+
+<p>As you become comfortable with 1. your terminal (especially on mac/linux) and 2.
+Blender, you can now run Blender Python scripts directly in a terminal. Typing
+<code>blender -P my\_script.py</code> will open a new Blender window with the results of the
+script loaded. However, for the sake of learning, I recommend following the previous
+approach for at least a little while.</p>
+
+<p>All example renders shown below were done with no lamps. I used ambient occlusion
+with environment lighting. This produces good results in this example with minimal
+work on our part. (To copy this setup, click the little globe in the right-hand
+panel. There will be checkboxes for both of these options.)</p>
+
+<h2>Drawing atoms</h2>
+
+<p>First, let&#39;s load the caffeine.json file we made.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/path/to/caffeine.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+    <span class="n">caffeine</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
+</code></pre></div>
+<p>That&#39;s it. Now that we have the necessary information in a Python data structure,
+let&#39;s look into drawing. For simplicity, let&#39;s start with an atom-only space-filling
+model. The atoms will all be spheres. Easy enough. We will iterate through the data
+we collected previously and, using Blender&#39;s &quot;bpy&quot; Python library, draw the shapes
+we need.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">bpy</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">draw_molecule</span><span class="p">(</span><span class="n">molecule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a molecule to blender.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">molecule</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">]:</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">primitive_uv_sphere_add</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">atom</span><span class="p">[</span><span class="s">&quot;location&quot;</span><span class="p">])</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">shade_smooth</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;/path/to/caffeine.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+    <span class="n">caffeine</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">in_file</span><span class="p">)</span>
+<span class="n">draw_molecule</span><span class="p">(</span><span class="n">caffeine</span><span class="p">)</span>
+</code></pre></div>
+<p>For each atom, we draw a sphere at the specified location.</p>
+
+<p><img src="/img/caffeine_step_one.png" alt=""></p>
+
+<p>We&#39;re already starting to see the shape of the molecule forming, and we can see
+Blender&#39;s awesome rendering capabilities. With nothing more than a few spheres,
+the molecule is looking pretty good. For the next step, let&#39;s reduce the size of
+the atoms and add in bonds.</p>
+
+<h2>Drawing Bonds</h2>
+
+<p>We have bond information that we currently aren&#39;t using. We will need to figure
+out where to draw each bond, and then place cylinders in the corresponding locations.
+As Blender requires a magnitude and a direction for each bond, we will need to
+use some vector mathematics. Let&#39;s add to the the above function.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="kn">import</span> <span class="nn">bpy</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c"># New imports!</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">acos</span>
+<span class="kn">from</span> <span class="nn">mathutils</span> <span class="kn">import</span> <span class="n">Vector</span>
+
+<span class="k">def</span> <span class="nf">draw_molecule</span><span class="p">(</span><span class="n">molecule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw a molecule to blender.&quot;&quot;&quot;</span>
+
+    <span class="c"># Draw atoms</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">molecule</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">]:</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">primitive_uv_sphere_add</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                                             <span class="n">location</span><span class="o">=</span><span class="n">atom</span><span class="p">[</span><span class="s">&quot;location&quot;</span><span class="p">])</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">shade_smooth</span><span class="p">()</span>
+
+    <span class="c"># Draw bonds</span>
+    <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">molecule</span><span class="p">[</span><span class="s">&quot;bonds&quot;</span><span class="p">]:</span>
+
+        <span class="c"># Extracting locations</span>
+        <span class="n">first_loc</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">][</span><span class="n">bond</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="s">&quot;location&quot;</span><span class="p">]</span>
+        <span class="n">second_loc</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">][</span><span class="n">bond</span><span class="p">[</span><span class="s">&quot;atoms&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]][</span><span class="s">&quot;location&quot;</span><span class="p">]</span>
+
+        <span class="c"># Useful values</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">c2</span><span class="o">-</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">first_loc</span><span class="p">,</span> <span class="n">second_loc</span><span class="p">)])</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([(</span><span class="n">c2</span><span class="o">+</span><span class="n">c1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">c2</span><span class="p">,</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">first_loc</span><span class="p">,</span> <span class="n">second_loc</span><span class="p">)])</span>
+        <span class="n">magnitude</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="nb">sum</span><span class="p">([(</span><span class="n">c2</span><span class="o">-</span><span class="n">c1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+                        <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">first_loc</span><span class="p">,</span> <span class="n">second_loc</span><span class="p">)]),</span> <span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="c"># Euler rotation calculation, (Vector from mathutils, acos from math)</span>
+        <span class="n">Vaxis</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+        <span class="n">Vobj</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">Vrot</span> <span class="o">=</span> <span class="n">Vobj</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">Vaxis</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">acos</span><span class="p">(</span><span class="n">Vobj</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Vaxis</span><span class="p">))</span>
+
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">primitive_cylinder_add</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">magnitude</span><span class="p">,</span>
+                                            <span class="n">location</span><span class="o">=</span><span class="n">center</span><span class="p">)</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">shade_smooth</span><span class="p">()</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">(</span><span class="n">angle</span><span class="p">,),</span> <span class="n">axis</span><span class="o">=</span><span class="n">Vrot</span><span class="p">)</span>
+</code></pre></div>
+<p>Don&#39;t get too scared by the mathematics; it&#39;s all basic vector operations. We get
+the coordinates of each atom in the bond, and then convert to a magnitude and a
+direction. Size the cylinder by its magnitude, and then rotate to the desired
+direction. Reducing the atom radius to 0.4, we end up with:</p>
+
+<p><img src="/img/caffeine_step_two.png" alt=""></p>
+
+<p>It&#39;s getting close. Before moving forward, let&#39;s add in support for double and
+triple bonds. This will require the ability to translate cylinders orthogonal to
+their current direction. With our previous vector math, this should be easy. Let&#39;s
+make translation rules for each type of bond, and then use those as needed.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="c"># Specify locations of each bond in every scenario</span>
+    <span class="k">if</span> <span class="n">bond</span><span class="p">[</span><span class="s">&quot;order&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">bond</span><span class="p">[</span><span class="s">&quot;order&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">diameters</span><span class="p">[</span><span class="s">&quot;bond&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v_obj</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">diameters</span><span class="p">[</span><span class="s">&quot;bond&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v_obj</span><span class="p">]]</span>
+    <span class="k">elif</span> <span class="n">bond</span><span class="p">[</span><span class="s">&quot;order&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">diameters</span><span class="p">[</span><span class="s">&quot;bond&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v_obj</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">diameters</span><span class="p">[</span><span class="s">&quot;bond&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v_obj</span><span class="p">]]</span>
+    <span class="c"># Draw bonds</span>
+    <span class="k">for</span> <span class="n">tran</span> <span class="ow">in</span> <span class="n">trans</span><span class="p">:</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">primitive_cylinder_add</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">magnitude</span><span class="p">,</span>
+                                            <span class="n">location</span><span class="o">=</span><span class="n">center</span><span class="p">)</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">shade_smooth</span><span class="p">()</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span><span class="p">,),</span> <span class="n">axis</span><span class="o">=</span><span class="n">Vrot</span><span class="p">)</span>
+        <span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">tran</span><span class="p">)</span>
+</code></pre></div>
+<p>We create a list of translation vectors based on the number of bonds that exist.
+For single and triple bonds, one cylinder remains unmoved. All other bonds are in
+the direction of the local object axis, with the constants of 1.4 and 2.0 chosen
+as separation values. Adding this results in, well, exactly what you&#39;d expect.</p>
+
+<p><img src="/img/caffeine_step_three.png" alt=""></p>
+
+<h2>Coloring structures</h2>
+
+<p>Materials are arguably the most important aspect of rendering in Blender. They have
+a lot of really cool options, and give meaning to the primitives underlying the
+render. The shapes we have been dealing with so far are rendered without materials,
+which is why they&#39;re so boring looking.</p>
+
+<p>For this example, let&#39;s make materials for carbon, nitrogen, and oxygen and give
+them different colors. We will then assign these materials as we draw the shapes.
+In the drawing function, we will now start with:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="s">&#39;N&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+           <span class="s">&#39;O&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="s">&#39;bond&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">colors</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">bpy</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">bpy</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">materials</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">diffuse_color</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">bpy</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">materials</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">specular_intensity</span> <span class="o">=</span> <span class="mf">0.2</span>
+</code></pre></div>
+<p>The colors dictionary is in RGB format, so bonds -&gt; gray, C -&gt; lighter gray,
+N -&gt; blue, and O -&gt; red. For each atom, we make a material with this diffuse color,
+and we lower the specularity (&quot;shininess&quot;) to make it look less plastic-y. In the
+lines after each call to draw a sphere or cylinder, add:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">bpy</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">active_object</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">materials</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bpy</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">materials</span><span class="p">[</span><span class="n">element</span><span class="p">])</span>
+</code></pre></div>
+<p>Which will, as you can probably guess, add a material to the active (most recently
+added) object. In the case of bonds, replace <code>element</code> with <code>&quot;bond&quot;</code>. Doing this
+gives the following result:</p>
+
+<p><img src="/img/caffeine_step_four.png" alt=""></p>
+
+<p>That&#39;s basically it! Let&#39;s add in some final aesthetic touches and generalize sizing spheres so we can use atomic radii.</p>
+
+<h2>Sizing atoms</h2>
+
+<p>One issue that we have yet to address is atom sizing. In our current code, hydrogen
+would be the same size as a heavy metal, which would make some weird-looking
+molecules. Luckily, this is an easy fix. Similar to our materials approach, let&#39;s
+make a dictionary of sphere radii and functionalize them based off of the atom type.</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">radii</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span> <span class="s">&#39;N&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span> <span class="s">&#39;O&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="s">&#39;bond&#39;</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">radii</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">radii</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">0.4</span><span class="o">/</span><span class="mi">70</span>
+</code></pre></div>
+<p>I got the atom information from <a href="http://en.wikipedia.org/wiki/Atomic_radius">wikipedia</a>,
+and chose a bond radius that didn&#39;t look weird. The loop converts from larger
+numbers (easier to work with) to Blender sizes. It ensures that a carbon sphere is
+0.4 Blender units, which is what we were using before. Now, all we have to do is
+generalize the sphere/cylinder drawing to something like:</p>
+<div class="highlight"><pre><code class="python language-python" data-lang="python"><span class="n">bpy</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">primitive_uv_sphere_add</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">radii</span><span class="p">[</span><span class="n">element</span><span class="p">],</span> <span class="n">location</span><span class="o">=</span><span class="n">loc</span><span class="p">)</span>
+</code></pre></div>
+<p>And we&#39;re done. Doing this produces our final product. The sizing in this case is
+subtle, but it definitely helps in other examples.</p>
+
+<p><img src="/img/caffeine_step_five.png" alt=""></p>
+
+<h2>In conclusion</h2>
+
+<p>I know that this might seem like a lot of work to just draw a molecule, but, once
+you understand the approach, you&#39;ll be able to use it easily from here on out.
+With this script, I can draw a high-resolution molecule in a few seconds, additionally
+making it an easy approach to visualize an array of molecules.</p>
+
+<p>Most powerfully, you now have access to this molecule in <em>both</em> Python and Blender.
+With Python, you can put this entire approach in a loop to draw different molecules
+in different locations. It&#39;s almost as easy to draw ten thousand chemicals as it
+is to draw only one. With Blender, you can use the molecule as one aspect of a much
+larger 3D scene. This is great for cover images and TOCs.</p>
+
+<p>Once again, the github repo can be found <a href="https://github.com/patrickfuller/blender-chemicals">here</a>.
+It runs much faster and handles a lot more corner cases. If any clarification is
+needed, feel free to leave a message in the comments!</p>
+
+</div>
+
+<!-- Disqus comments -->
+<script type="text/javascript">
+  var disqus_shortname = 'patrickfuller';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- MathJax LaTeX editor, with edits from http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+          <div id="disqus_thread"></div>
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                <a href="mailto:patrickfuller@gmail.com"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/patrickfuller"><i class="fa fa-github"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    <!-- Javascript -->
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

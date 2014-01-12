@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Texting from a Computer in Python</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- CSS - font, bootstrap, syntax, custom -->
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">patrick fuller's blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Texting from a Computer in Python</h2>
+<p class="meta">21 May 2012</p>
+
+<div class="post">
+<p>Here&#39;s a script to send a text message in Python. It uses the standard library and
+is very straightforward. It utilizes the fact that most major carriers allow texting
+via email (ie. by <a href="http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>,
+so nothing more is needed than an email account and a desired target.</p>
+
+<p>In my work, I use it to tell me when my computational simulations are done running.
+Also, it can send to any phone number and can be put in an infinite loop; days of
+fun, right there.</p>
+
+<script src="https://gist.github.com/8390767.js?file=texter.py"> </script>
+
+</div>
+
+<!-- Disqus comments -->
+<script type="text/javascript">
+  var disqus_shortname = 'patrickfuller';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- MathJax LaTeX editor, with edits from http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+          <div id="disqus_thread"></div>
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                <a href="mailto:patrickfuller@gmail.com"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/patrickfuller"><i class="fa fa-github"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    <!-- Javascript -->
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Convolution - Image processing for scientists and engineers, Part 2</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- CSS - font, bootstrap, syntax, custom -->
+        <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">patrick fuller's blog</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>Convolution - Image processing for scientists and engineers, Part 2</h2>
+<p class="meta">25 Nov 2012</p>
+
+<div class="post">
+<p>In the <a href="/images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/">first part</a>
+of this tutorial, I covered the basics of image processing - viewing
+images as data, iterating through pixels, and performing basic operations. This
+part will cover the idea of image convolution, and future parts will go on to
+discuss some of the more popular uses of the technique.</p>
+
+<p>As the field of image processing is heavily influenced by mathematicians, there
+are reams of unnecessarily complex equations surrounding image convolution. I don&#39;t
+like that. In this tutorial, I will explain the concepts, show you some logic, and
+then tack on the equations at the end.</p>
+
+<p>Additionally, I want to move away from working with images directly. Remember from
+the first part that image pixels are stored as ints. As we get into increasingly
+complex filters, the rounding error associated with operating directly on ints
+will get annoying. Let&#39;s avoid this by approaching image processing in the following
+manner:</p>
+
+<ol>
+<li> Convert images to float arrays</li>
+<li> Operate on float arrays</li>
+<li> Convert back to images</li>
+</ol>
+
+<p>This will slow down our code slightly, but it will save us from having to deal
+with rounding error and pixel location logic.</p>
+
+<p>The code to do steps 1 and 3 is simple enough. For a black-and-white image, we
+just need to iterate.</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Converts black-and-white PImage to float[][]</span>
+<span class="cm"> */</span>
+<span class="kt">float</span><span class="o">[][]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">PImage</span> <span class="n">img</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">float</span><span class="o">[][]</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">][</span><span class="n">img</span><span class="o">.</span><span class="na">height</span><span class="o">];</span>
+  <span class="n">img</span><span class="o">.</span><span class="na">loadPixels</span><span class="o">();</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">img</span><span class="o">.</span><span class="na">height</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="n">brightness</span><span class="o">(</span><span class="n">img</span><span class="o">.</span><span class="na">pixels</span><span class="o">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">]);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">values</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Converts a float[][] to a normalized black-and-white PImage</span>
+<span class="cm"> */</span>
+<span class="n">PImage</span> <span class="nf">toImage</span><span class="o">(</span><span class="kt">float</span><span class="o">[][]</span> <span class="n">values</span><span class="o">)</span> <span class="o">{</span>
+
+  <span class="c1">// Scale values to [0, 255]</span>
+  <span class="kt">float</span> <span class="n">maximum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">minimum</span> <span class="o">=</span> <span class="n">Float</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">;</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">values</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">maximum</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">maximum</span><span class="o">,</span> <span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]);</span>
+      <span class="n">minimum</span> <span class="o">=</span> <span class="n">min</span><span class="o">(</span><span class="n">minimum</span><span class="o">,</span> <span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">values</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]-</span><span class="n">minimum</span><span class="o">)/(</span><span class="n">maximum</span><span class="o">-</span><span class="n">minimum</span><span class="o">)</span> <span class="o">*</span> <span class="mf">255.0</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="n">PImage</span> <span class="n">img</span> <span class="o">=</span> <span class="n">createImage</span><span class="o">(</span><span class="n">values</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">values</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">,</span> <span class="n">ALPHA</span><span class="o">);</span>
+  <span class="n">img</span><span class="o">.</span><span class="na">loadPixels</span><span class="o">();</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">img</span><span class="o">.</span><span class="na">height</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="n">img</span><span class="o">.</span><span class="na">pixels</span><span class="o">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">]</span> <span class="o">=</span> <span class="n">color</span><span class="o">(</span><span class="kt">int</span><span class="o">(</span><span class="n">values</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]));</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="n">img</span><span class="o">.</span><span class="na">updatePixels</span><span class="o">();</span>
+  <span class="k">return</span> <span class="n">img</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>If you want to generalize this to colors, you can substitute a [ red, green, blue ]
+array for each element (so you&#39;d have a <code>float[][][]</code>). For now, I&#39;m sticking
+with black-and-white images. Color images would obfuscate the core concepts of
+the tutorial.</p>
+
+<p>Let&#39;s start talking about convolution. In the first section, we iterated through
+pixels one at a time. Writing loops like</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">img</span><span class="o">.</span><span class="na">height</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="c1">// Do stuff</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>produced the following iteration pattern</p>
+
+<p><img src="/img/linear.gif" alt=""></p>
+
+<p>All the logic we could create came from information about these solitary pixels.
+However, most interesting information comes from <em>groups</em> of pixels. Most likely,
+we care about a pixel&#39;s neighbors. What color are they? Are there any noticeable
+patterns? This is the issue that image convolution addresses. Rather than iterating
+through every pixel linearly, we will iterate around each pixel&#39;s neighbors. For
+example, if we were only concerned with a pixel&#39;s immediate neighbors, our new
+iteration scheme would look like</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">img</span><span class="o">.</span><span class="na">width</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">img</span><span class="o">.</span><span class="na">height</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="c1">// Current center pixel is at (x, y)</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=-</span><span class="mi">1</span><span class="o">;</span> <span class="n">u</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">;</span> <span class="n">u</span><span class="o">++)</span> <span class="o">{</span>
+      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">=-</span><span class="mi">1</span><span class="o">;</span> <span class="n">v</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// Current neighbor is at (x+u, y+v)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>and would produce a pattern like</p>
+
+<p><img src="/img/convolution.gif" alt=""></p>
+
+<p>Here, the blue square represents the center pixel, and iterates in the same pattern
+as before. The green square is the current pixel that the code&#39;s inner loop is
+evaluating. Take some time to understand how the above code translates into the
+shown iteration scheme.</p>
+
+<p>Now, what do we do with all this extra iteration? In convolution, we take a
+weighted average of all the neighbor pixels and use it to update the center pixel
+of an output image. In the simplest example, let&#39;s weight all the neighbors equally.
+Our weights look like</p>
+
+<p><code>\( \left[\begin{array}{ccc} 1/9 &amp; 1/9 &amp; 1/9 \\ 1/9 &amp; 1/9 &amp; 1/9 \\ 1/9 &amp; 1/9 &amp; 1/9 \end{array}\right]\)</code></p>
+
+<p>In Processing, this operation looks like</p>
+<div class="highlight"><pre><code class="java language-java" data-lang="java"><span class="cm">/**</span>
+<span class="cm"> * Convolves a float[][] representation of an image with a kernel of weights</span>
+<span class="cm"> */</span>
+<span class="kt">float</span><span class="o">[][]</span> <span class="nf">convolve</span><span class="o">(</span><span class="kt">float</span><span class="o">[][]</span> <span class="n">img</span><span class="o">,</span> <span class="kt">float</span><span class="o">[][]</span> <span class="n">kernel</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kt">int</span> <span class="n">xn</span><span class="o">,</span> <span class="n">yn</span><span class="o">;</span>
+  <span class="kt">float</span> <span class="n">average</span><span class="o">;</span>
+
+  <span class="c1">// Showcasing how to access width and height of nested array</span>
+  <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+  <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">img</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span>
+  <span class="kt">float</span><span class="o">[][]</span> <span class="n">output</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="o">[</span><span class="n">w</span><span class="o">][</span><span class="n">h</span><span class="o">];</span>
+
+  <span class="c1">// Iterate through image pixels</span>
+  <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">x</span><span class="o">&lt;</span><span class="n">w</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">y</span><span class="o">&lt;</span><span class="n">h</span><span class="o">;</span> <span class="n">y</span><span class="o">++)</span> <span class="o">{</span>
+
+      <span class="c1">// Iterate through kernel values to get weighted average</span>
+      <span class="n">average</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+      <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">u</span><span class="o">&lt;</span><span class="n">kernel</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">u</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">v</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">v</span><span class="o">&lt;</span><span class="n">kernel</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">;</span> <span class="n">v</span><span class="o">++)</span> <span class="o">{</span>
+
+          <span class="c1">// Get associated neighbor pixel coordinates</span>
+          <span class="n">xn</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">u</span> <span class="o">-</span> <span class="n">kernel</span><span class="o">.</span><span class="na">length</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+          <span class="n">yn</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">v</span> <span class="o">-</span> <span class="n">kernel</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">length</span><span class="o">/</span><span class="mi">2</span><span class="o">;</span>
+
+          <span class="c1">// Make sure we don&#39;t go off of an edge of the image</span>
+          <span class="n">xn</span> <span class="o">=</span> <span class="n">constrain</span><span class="o">(</span><span class="n">xn</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">w</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+          <span class="n">yn</span> <span class="o">=</span> <span class="n">constrain</span><span class="o">(</span><span class="n">yn</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">h</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+
+          <span class="c1">// Add weighted neighbor to average</span>
+          <span class="n">average</span> <span class="o">+=</span> <span class="n">img</span><span class="o">[</span><span class="n">xn</span><span class="o">][</span><span class="n">yn</span><span class="o">]</span> <span class="o">*</span> <span class="n">kernel</span><span class="o">[</span><span class="n">u</span><span class="o">][</span><span class="n">v</span><span class="o">];</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="c1">// Set output pixel to weighted average value</span>
+      <span class="n">output</span><span class="o">[</span><span class="n">x</span><span class="o">][</span><span class="n">y</span><span class="o">]</span> <span class="o">=</span> <span class="n">average</span><span class="o">;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">output</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>and, when run on this picture of my living room, produces</p>
+
+<p><img src="/img/composited_convolution.png" alt=""></p>
+
+<p>Hmm, that ever so slightly blurred the image. If you think about what we just
+did, that makes sense. Every pixel&#39;s value was influenced by its neighbors, so
+local jumps in pixel brightness were tapered.</p>
+
+<p>I promised you some mathematics, so here it is.</p>
+
+<p><code>\((f*g)(x,y) = \iint f(x-u,y-v)g(u,v)\,du\,dv\)</code></p>
+
+<p>I wrote the equation applied to the &quot;special&quot; case of images, although, in image
+processing literature, you usually see the generalized n-dimensional vector
+version. Just in case you come across an n-dimensional image. Or something.</p>
+
+<p>I used <code>\(x\)</code>, <code>\(y\)</code>, <code>\(u\)</code>, and <code>\(v\)</code> to coincide with the variables in the above code.
+<code>\(f\)</code> is the image, and <code>\(g\)</code> is the matrix of weights. Remember that an integral
+operator applied to discrete information is just a sum, and you can see how the
+entire equation is nothing more than a weighted average.</p>
+
+<p>One nice thing about the math is the introduction of an asterisk as shorthand
+for convolution, <code>\(f*g\)</code>. You&#39;ll see this operator in a lot in image-processing
+papers, so keep it in mind if you&#39;re reading up on the topic.</p>
+
+<p>So, what can we do with convolution? The set of weights we choose - or the <em>kernel</em> - can
+create a wide range of outputs. In the next few sections, we will explore some of
+the most common kernels. The <a href="/gradients-image-processing-for-scientists-and-engineers-part-3/">next section</a>
+will cover one of the most useful data mining skills - estimating gradients.</p>
+
+</div>
+
+<!-- Disqus comments -->
+<script type="text/javascript">
+  var disqus_shortname = 'patrickfuller';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<!-- MathJax LaTeX editor, with edits from http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript">
+  MathJax.Hub.Config({
+    tex2jax: {
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+          <div id="disqus_thread"></div>
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                <a href="mailto:patrickfuller@gmail.com"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/patrickfuller"><i class="fa fa-github"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+    <!-- Javascript -->
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>
