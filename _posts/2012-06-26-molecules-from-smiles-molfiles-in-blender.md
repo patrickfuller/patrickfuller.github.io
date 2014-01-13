@@ -161,9 +161,9 @@ Converting from the molecule object to json will help us out in many ways. For
 example, we can test the quality of our file format converter without even needing
 to involve blender (it's better to debug code in isolated chunks than it is to
 debug the whole thing). If you want to cross-check your work, load your file into
-[imolecule](http://www.patrick-fuller.com/imolecule.html). If your json is invalid,
-this tool will print an error. And, if you want to skip format conversion logic
-entirely, click the "save as" button in the window. Cool, right?
+[imolecule](http://ec2-184-73-149-254.compute-1.amazonaws.com:9000/). If your json
+is invalid, this tool will print an error. And, if you want to skip format conversion
+logic entirely, click the "save as" button in the window. Cool, right?
 
 Remembering that the task at hand was to create a caffeine molecule, let's do so.
 I'm partial to the SMILES representation of small molecules, which can be found
@@ -205,7 +205,7 @@ That's it. You have your Python editor directly in Blender.
 
 As you become comfortable with 1. your terminal (especially on mac/linux) and 2.
 Blender, you can now run Blender Python scripts directly in a terminal. Typing
-`blender -P my\_script.py` will open a new Blender window with the results of the
+`blender -P my_script.py` will open a new Blender window with the results of the
 script loaded. However, for the sake of learning, I recommend following the previous
 approach for at least a little while.
 
