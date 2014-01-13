@@ -8,6 +8,8 @@ categories:
   - Science
 ---
 
+![](/img/living_room_3d_convolution.png)
+
 In the [first part]({% post_url 2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers %})
 of this tutorial, I covered the basics of image processing - viewing
 images as data, iterating through pixels, and performing basic operations. This

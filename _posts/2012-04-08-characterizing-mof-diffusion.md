@@ -8,6 +8,8 @@ categories:
   - Science
 ---
 
+![](/img/fcs.png)
+
 My first paper in graduate school was published in Angewandte Chemie a few months
 ago. Check it out [here](http://onlinelibrary.wiley.com/doi/10.1002/anie.201108492/abstract;jsessionid=41D8D98E1E325B5D7DAD39F5D1DB0D51.d03t01)!
 
