@@ -87,8 +87,8 @@ In Processing, we can iterate through the pixels of an image easily enough.
  */
 PImage iterate(PImage img) {
   img.loadPixels();
-  for(int x = 0; x &lt; img.width; x++) {
-    for(int y = 0; y &lt; img.height; y++) {
+  for(int x = 0; x < img.width; x++) {
+    for(int y = 0; y < img.height; y++) {
       int loc = x + y * img.width;
       img.pixels[loc] = // Do something here!
     }
@@ -113,13 +113,13 @@ PImage findFurniture(PImage img) {
   PImage output = createImage(img.width, img.height, 'L');
   img.loadPixels();
   output.loadPixels();
-  for(int x = 0; x &lt; img.width; x++) {
-    for(int y = 0; y &lt; img.height; y++) {
+  for(int x = 0; x < img.width; x++) {
+    for(int y = 0; y < img.height; y++) {
       int loc = x + y * img.width;
 
       // If the input pixel is dark, highlight the output pixel
       int col;
-      if(brightness(img.pixels[loc]) &lt; 60) {
+      if(brightness(img.pixels[loc]) < 60) {
         col = 255;
       }
       // Otherwise, the output pixel is black
@@ -151,13 +151,13 @@ PImage findLights(PImage img) {
   PImage output = createImage(img.width, img.height, 'L');
   img.loadPixels();
   output.loadPixels();
-  for(int x = 0; x &lt; img.width; x++) {
-    for(int y = 0; y &lt; img.height; y++) {
+  for(int x = 0; x < img.width; x++) {
+    for(int y = 0; y < img.height; y++) {
       int loc = x + y * img.width;
 
       // If the input pixel is light, highlight the output pixel
       int col;
-      if(brightness(img.pixels[loc]) &gt; 230) {
+      if(brightness(img.pixels[loc]) > 230) {
         col = 255;
       }
       // Otherwise, the output pixel is black
@@ -189,13 +189,13 @@ PImage findNuclei(PImage img) {
   PImage output = createImage(img.width, img.height, 'L');
   img.loadPixels();
   output.loadPixels();
-  for(int x = 0; x &lt; img.width; x++) {
-    for(int y = 0; y &lt; img.height; y++) {
+  for(int x = 0; x < img.width; x++) {
+    for(int y = 0; y < img.height; y++) {
       int loc = x + y * img.width;
 
       // If the input pixel has red and blue elements, highlight it
       int col;
-      if(blue(img.pixels[loc]) &gt; 100 && red(img.pixels[loc]) &gt; 50) {
+      if(blue(img.pixels[loc]) > 100 && red(img.pixels[loc]) > 50) {
         col = 255;
       }
       // Otherwise, the output pixel is black

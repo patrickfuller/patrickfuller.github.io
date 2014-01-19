@@ -74,8 +74,8 @@ float[][] gabor(float[][] img, float wavelength, float direction) {
   float[][] kernel = new float[2*x+1][2*x+1];
   int uc, vc;
   float f, g, theta;
-  for(int u=0; u&lt;kernel.length; u++) {
-    for(int v=0; v&lt;kernel[0].length; v++) {
+  for(int u=0; u<kernel.length; u++) {
+    for(int v=0; v<kernel[0].length; v++) {
       // Center the Gaussian sample so max is at u,v = 10,10
       uc = u - (kernel.length-1)/2;
       vc = v - (kernel[0].length-1)/2;

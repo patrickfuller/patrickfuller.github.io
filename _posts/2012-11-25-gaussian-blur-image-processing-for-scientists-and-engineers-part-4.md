@@ -63,8 +63,8 @@ float[][] gaussianBlur(float[][] img, float sigma) {
   int uc, vc;
   float g, sum;
   sum = 0;
-  for(int u=0; u&lt;kernel.length; u++) {
-    for(int v=0; v&lt;kernel[0].length; v++) {
+  for(int u=0; u<kernel.length; u++) {
+    for(int v=0; v<kernel[0].length; v++) {
       // Center the Gaussian sample so max is at u,v = 10,10
       uc = u - (kernel.length-1)/2;
       vc = v - (kernel[0].length-1)/2;
@@ -75,8 +75,8 @@ float[][] gaussianBlur(float[][] img, float sigma) {
     }
   }
   // Normalize it
-  for(int u=0; u&lt;kernel.length; u++) {
-    for(int v=0; v&lt;kernel[0].length; v++) {
+  for(int u=0; u<kernel.length; u++) {
+    for(int v=0; v<kernel[0].length; v++) {
       kernel[u][v] /= sum;
     }
   }

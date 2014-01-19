@@ -106,8 +106,8 @@ PImage showDerivative(float[][] img, String type) {
    magnitude = new float[img.length][img[0].length];
    direction = new float[img.length][img[0].length];
    maximum = 0; minimum = Float.MAX_VALUE;
-   for(int x=0; x&lt;img.length; x++) {
-     for(int y=0; y&lt;img[0].length; y++) {
+   for(int x=0; x<img.length; x++) {
+     for(int y=0; y<img[0].length; y++) {
        magnitude[x][y] = sqrt(pow(dx[x][y], 2) + pow(dy[x][y], 2));
        maximum = max(maximum, magnitude[x][y]);
        minimum = min(minimum, magnitude[x][y]);
@@ -118,16 +118,16 @@ PImage showDerivative(float[][] img, String type) {
 
    PImage output = createImage(img.length, img[0].length, RGB);
    output.loadPixels();
-   for(int x=0; x&lt;output.width; x++) {
-     for(int y=0; y&lt;output.height; y++) {
+   for(int x=0; x<output.width; x++) {
+     for(int y=0; y<output.height; y++) {
        luminosity = int(255.0 * (magnitude[x][y]-minimum) / (maximum-minimum));
 
        // Map gradient direction to one of four colors
-       if(direction[x][y] &gt;= -PI/2 && direction[x][y] &lt; -PI/4)
+       if(direction[x][y] >= -PI/2 && direction[x][y] < -PI/4)
          col = color(luminosity, 0, 0);
-       else if(direction[x][y] &gt;= -PI/4 && direction[x][y] &lt; 0)
+       else if(direction[x][y] >= -PI/4 && direction[x][y] < 0)
          col = color(0, luminosity, 0);
-       else if(direction[x][y] &gt;= 0 && direction[x][y] &lt; PI/4)
+       else if(direction[x][y] >= 0 && direction[x][y] < PI/4)
          col = color(0, 0, luminosity);
        else
          col = color(luminosity, 0, luminosity);
