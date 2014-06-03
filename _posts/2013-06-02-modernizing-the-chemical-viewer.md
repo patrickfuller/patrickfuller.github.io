@@ -50,35 +50,23 @@ on this later.
 ##What I Wrote and Why it's Different
 
 For the sake of speed, the open-source chemistry libraries out there are written
-in a fast compiled language (usually C++). While speed is important, it comes
+in a fast compiled language - usually C++. While speed is important, it comes
 with trade offs. In the case of code modernization, the standard web stack
-(HTML + Javascript) historically has not interfaced easily with a compiled
-language. There's good reason for this: when you navigate to a web site, your
-(client) browser does the work of HTML / javascript rendering, which frees up
-the server to serve many other clients. However, a compiled language, in its
-desire to be close to the machinery of a computer, is stuck on the server.
+historically has not interfaced easily with a compiled language. There's good
+reason for this: when you navigate to a web site, your browser does the work
+of HTML / javascript rendering, which frees up the server to serve many other
+clients. However, a compiled language, in its desire to be close to the
+machinery of a computer, is stuck on the server.
 
 There is a solution to this issue, which involves setting up something referred
 to as a "socket" for auxiliary communication. Historically, this was prohibitively
 difficult to do between client-side javascript and a server. Fortunately, things
-have changed. (Warning: this is about to get complicated. IF you're not interested
-in code, you can probably skip the rest of this paragraph) Recently, the folks at
-the [IPython](http://ipython.org/) project spurred the development of
-[pyzmq](https://github.com/zeromq/pyzmq), a Python implementation of [zeroMQ](http://www.zeromq.org/),
-which is a project that makes sockets *much* easier to use. It's great. Also
-recently, the HTML5 initiative has defined a protocol for [WebSocket](http://www.websocket.org/),
-which allow Javascript programs to open sockets for communication without using a
-Flash hack that required root access. There is a messiness involved with handling
-these implementations across browsers and operating systems; the answer to this
-is [socket.io](http://socket.io/). Finally, there needs to be a proxy to interface
-between the zeroMQ socket and the socket.io WebSocket. This "glue" is provided by
-[Tornado](http://www.tornadoweb.org/en/stable/), an asynchronous Python web
-framework and [tornadio](https://github.com/MrJoes/tornadio), a communicator
-between Tornado and socket.io. Combine this all with the Python wrappers available
-to the aforementioned chemical libraries, and you have a web-enabled system.
-
-*I'm going to draw a picture of this at some point. My attempt at doing this
-with boxes in powerpoint was plain terrible.*
+have changed. (Update June 2014: This has gotten MUCH easier). Most browsers now
+support HTML5 and the [WebSocket](http://www.websocket.org/) protocol. This
+allows many possibilities beyond standard HTTP requests, enabling programming
+patterns that were previously not possible. Using the [Tornado](http://www.tornadoweb.org/en/stable/)
+web framework simplifies Python-Javascript websocket communication, and then
+Python can interface with compiled server-side software.
 
 Here's the upshot: not only can we communicate between browser windows and the
 server, we can also split computational effort between the client and the server.
@@ -95,7 +83,8 @@ around many labs, and say this code had the function to run full MD simulations.
 If the output of these simulations was relevant to an experimental chemist,
 and the front-end program was designed well, they could run otherwise complex
 code on a fast server with the click of a button. You could even expand on
-this approach with something like cloud supercomputing!
+this approach with something like cloud supercomputing, enabling a chemist to
+run multi-core simulations in real time.
 
 ##In Conclusion
 
