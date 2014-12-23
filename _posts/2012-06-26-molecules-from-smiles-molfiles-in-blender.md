@@ -76,9 +76,9 @@ manuscripts.
 
 Here's the core problem: most molecule viewers are designed for day-to-day
 chemistry work, not graphics rendering. Using these programs for cover art is
-like trying to hammer in a screw (it'll work, but your result's going to suck).
-What we need is a high-powered program designed for computer graphics rendering,
-and then a simple means to add molecular structures into it.
+the wrong tool for the job. What we need is a high-powered program designed
+for computer graphics rendering, and then a simple means to add molecular structures
+into it.
 
 Enter [blender](http://www.blender.org/), an open-source 3D modeling program with
 an amazingly active community of developers and users. With training, it can be
