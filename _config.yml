@@ -2,4 +2,4 @@ url: http://www.patrick-fuller.com
 name: "patrick fuller's blog"
 description: random thoughts on science and coding.
 markdown: redcarpet
-pygments: true
+highlighter: pygments
