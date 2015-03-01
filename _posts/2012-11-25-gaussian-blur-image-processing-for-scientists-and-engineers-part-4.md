@@ -98,6 +98,15 @@ kernel size based on the inputted sigma value. This can be done analytically (ie
 if you want the cutoff to be no more than 0.5%, then your kernel size needs to be
 greater than `\(1+2\sqrt{-2 \sigma^2 \ln{0.005}}\)`).
 
+<p class="alert-info">
+The cutoff equation above was derived by defining the percentage threshold \(p\) as:
+<br />
+\(p = \frac{g(0,r)}{g(0,0)} = \frac{\frac{1}{2\pi\sigma^2}e^{-\frac{r^2}{2\sigma^2}}}{\frac{1}{2\pi\sigma^2}e^{0}}\)
+<br />
+This simplifies to \(r=\sqrt{-2\sigma^2\ln{p}}\). The rest of the equation is
+a nomenclature change, with the minimum diameter \(d=1+2r\).
+</p>
+
 With that kind of logic, large sigma values make bigger kernels, which result
 in more blurring. Here is `\(\sigma = 10\)` again, but with a generated kernel
 size of 69.
