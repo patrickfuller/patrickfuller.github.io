@@ -16,4 +16,31 @@ In my work, I use it to tell me when my computational simulations are done runni
 Also, it can send to any phone number and can be put in an infinite loop; days of
 fun, right there.
 
-{% gist 8390767 texter.py %}
+```python
+import smtplib
+from email.mime.text import MIMEText
+
+# Message to be sent
+message = MIMEText("Hello, texting!")
+
+# Sending email username/password and receiving phone number
+email_username = ""
+email_password = ""
+phone_number = ""
+
+# Gmail to Verizon. Change here for different combinations.
+email_username += "@gmail.com"
+phone_number += "@vtext.com"
+
+# Format message to look like an email
+message["From"] = email_username
+message["To"] = phone_number
+message["Subject"] = "From your server!"
+
+# Connect and send
+s = smtplib.SMTP('smtp.gmail.com:587')
+s.starttls()
+s.login(email_username, email_password)
+s.sendmail(email_username, phone_number, message.as_string())
+s.quit()
+```
