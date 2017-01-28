@@ -33,7 +33,7 @@ and I claim no responsibility for misinterpreted data. Read the damn tutorial.
 The 3D visualizations were done in Blender. The script I used to do so is stored
 in a Github repo [here](https://github.com/patrickfuller/blender-image-pixels).
 
-##Images are data
+## Images are data
 
 As a starting point, consider black-and-white images. These are very common in
 small-scale science, as color isn't really a thing when you're talking sizes
@@ -47,7 +47,7 @@ images, each pixel can take an integer value from 0 to 255. 0 is black, 255 is
 white. The sample image is 800 x 600 pixels, so it consists of (800\*600) 480,000
 data points. Which brings me to my next point:
 
-##Images are a *lot* of data
+## Images are a *lot* of data
 
 In the small sample image above, we're dealing with half a million numbers.
 Full-res SEM images can be 5,000 x 5,000 pixels, representing 25 million data
@@ -61,7 +61,7 @@ headaches (ie. crashed laptops) when we get to data manipulation. If you're
 processing a lot of images, don't be afraid of scaling down the size (in fact,
 this is a good approach to reduce noise!).
 
-##Data can be manipulated
+## Data can be manipulated
 
 To convert the image above into a more mathematical notation, we are dealing with
 an 800 x 600 matrix of numbers. So, what can we do with this representation? The

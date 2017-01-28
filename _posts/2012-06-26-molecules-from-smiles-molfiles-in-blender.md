@@ -42,7 +42,7 @@ As my inaugural scientific visualization post, let's start with one of the most
 common visualization tasks for chemists. I will show you how to easily draw any
 molecule in blender.
 
-##What people are doing
+## What people are doing
 
 The typical approach involves Powerpoint (or Photoshop/GIMP for the more artistically
 inclined) and a program already in their workflow (e.g. JMol, Mercury, etc.).
@@ -72,7 +72,7 @@ aforementioned comments. It's not fair by any means, but you can't really blame
 them. It's exactly what you would do if you were told to critique a pile of
 manuscripts.
 
-##A better approach
+## A better approach
 
 Here's the core problem: most molecule viewers are designed for day-to-day
 chemistry work, not graphics rendering. Using these programs for cover art is
@@ -93,7 +93,7 @@ cylinders, etc.), overlay them with materials and textures, and adjust our viewp
 and lighting. In order to draw molecules without adding shapes by hand, we need
 to use Python for some heavy automation.
 
-##Parsing molecules
+## Parsing molecules
 
 First, let's look into how we will want to specify chemical structures. The world
 of chemistry is littered with terrible file formats, and, due to the general resilience
@@ -189,7 +189,7 @@ add `indent=4` to the `json.dumps` method in the converter.)
 With a single data format and no more need of external libraries, we are ready to
 use Blender!
 
-##Python in Blender
+## Python in Blender
 
 Using Python in Blender requires a bit of explanation. While its API is through a
 Python package, this library only works in Blender's own script editor (there are
@@ -214,7 +214,7 @@ with environment lighting. This produces good results in this example with minim
 work on our part. (To copy this setup, click the little globe in the right-hand
 panel. There will be checkboxes for both of these options.)
 
-##Drawing atoms
+## Drawing atoms
 
 First, let's load the caffeine.json file we made.
 
@@ -254,7 +254,7 @@ Blender's awesome rendering capabilities. With nothing more than a few spheres,
 the molecule is looking pretty good. For the next step, let's reduce the size of
 the atoms and add in bonds.
 
-##Drawing Bonds
+## Drawing Bonds
 
 We have bond information that we currently aren't using. We will need to figure
 out where to draw each bond, and then place cylinders in the corresponding locations.
@@ -341,7 +341,7 @@ as separation values. Adding this results in, well, exactly what you'd expect.
 
 ![](/img/caffeine_step_three.png)
 
-##Coloring structures
+## Coloring structures
 
 Materials are arguably the most important aspect of rendering in Blender. They have
 a lot of really cool options, and give meaning to the primitives underlying the
@@ -378,7 +378,7 @@ gives the following result:
 
 That's basically it! Let's add in some final aesthetic touches and generalize sizing spheres so we can use atomic radii.
 
-##Sizing atoms
+## Sizing atoms
 
 One issue that we have yet to address is atom sizing. In our current code, hydrogen
 would be the same size as a heavy metal, which would make some weird-looking
@@ -406,7 +406,7 @@ subtle, but it definitely helps in other examples.
 
 ![](/img/caffeine_step_five.png)
 
-##In conclusion
+## In conclusion
 
 I know that this might seem like a lot of work to just draw a molecule, but, once
 you understand the approach, you'll be able to use it easily from here on out.

@@ -93,7 +93,7 @@ float[][] gabor(float[][] img, float wavelength, float direction) {
 }
 ```
 
-##In conclusion
+## In conclusion
 
 While there is much more to learn in the field of image processing, I'm choosing
 to end my tutorial here. Why? Primarily, I have found that convolution is the

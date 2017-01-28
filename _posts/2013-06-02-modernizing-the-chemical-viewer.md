@@ -24,7 +24,7 @@ that "cutting edge" part), and then go on to try to convince some of you to go o
 and use this as a base to make something awesome. Before doing that, let's start
 at the beginning:
 
-##The State of Chemical Software
+## The State of Chemical Software
 
 To put it bluntly, most of the end-user chemical software out there is behind a
 paywall and/or becoming dated. Programs like [ChemDraw](http://www.cambridgesoft.com/Ensemble_for_Chemistry/ChemDraw/)
@@ -47,7 +47,7 @@ software and waiting for programs to load. Rather, everything they need will run
 right in their browser. This will enable a ton of interesting new capabilities - more
 on this later.
 
-##What I Wrote and Why it's Different
+## What I Wrote and Why it's Different
 
 For the sake of speed, the open-source chemistry libraries out there are written
 in a fast compiled language - usually C++. While speed is important, it comes
@@ -86,7 +86,7 @@ code on a fast server with the click of a button. You could even expand on
 this approach with something like cloud supercomputing, enabling a chemist to
 run multi-core simulations in real time.
 
-##In Conclusion
+## In Conclusion
 
 This program can interface with existing chemical software, and does not require
 installation. Right now, I have only interfaced with Open Babel and RDKit, but
