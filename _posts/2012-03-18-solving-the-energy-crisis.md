@@ -18,7 +18,7 @@ their potential application to natural gas products. Since then, it's been
 rated one of [Wired's top science videos](http://www.wired.com/wiredscience/2012/02/science-visualizations-2011/?pid=3021),
 and has been on a number of blogs.
 
-<iframe width="600" height="337" src="http://www.youtube.com/embed/QaKSekjAnqY?color=white&amp;theme=light">&nbsp;</iframe>
+<iframe width="600" height="337" src="https://www.youtube.com/embed/QaKSekjAnqY?color=white&amp;theme=light">&nbsp;</iframe>
 
 I won't delve into the science here, but rather I'd like to share my thoughts on
 visualization and the role of aesthetics and presentation in complicated topics.
