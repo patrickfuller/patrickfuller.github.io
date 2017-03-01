@@ -28,7 +28,7 @@ As a whole, science and technology have made incredible advancements in aestheti
 Programming presentations are [succinct](http://www.patrick-fuller.com/pycon-2012/),
 biologists have made videos like [this](http://www.youtube.com/watch?v=wJyUtbn0O5Y)
 and [this](http://www.youtube.com/watch?v=NjgBnx1jVIU), and physicists can point
-to, like, every image of space ever taken.
+to every image of space ever taken.
 
 However, most chemistry graphics look like they were thrown together by a toddler.
 I understand the sentiment behind this: "it's the science that matters", "I can't
@@ -36,7 +36,7 @@ waste time learning how to do this", blah blah blah. While that's kind of true,
 no one will even *read* your paper if it has these graphics. Seriously, anything
 short of a cure for cancer will be skimmed over if it isn't visually appealing.
 You've spent months to years working toward a paper; you can afford yourself a
-week or two to make your graphics not look like crap.
+week or two to make your graphics look decent.
 
 As my inaugural scientific visualization post, let's start with one of the most
 common visualization tasks for chemists. I will show you how to easily draw any
@@ -161,7 +161,7 @@ Converting from the molecule object to json will help us out in many ways. For
 example, we can test the quality of our file format converter without even needing
 to involve blender (it's better to debug code in isolated chunks than it is to
 debug the whole thing). If you want to cross-check your work, load your file into
-[imolecule](http://ec2-184-73-149-254.compute-1.amazonaws.com:9000/). If your json
+[imolecule](http://patrickfuller.github.io/imolecule/). If your json
 is invalid, this tool will print an error. And, if you want to skip format conversion
 logic entirely, click the "save as" button in the window. Cool, right?
 
