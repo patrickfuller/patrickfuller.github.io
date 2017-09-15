@@ -122,7 +122,7 @@ Despite the zombies, post-apocalyptic life is going pretty well. After inventing
 
 One morning, you're with your team running through some math. Communication is going pretty well, but it does use an awful lot of pipes. A lot of pipes means a lot of air. You now have hundreds of pipes transmitting data, and peak communication loads are wearing on your air compressor. If you want to keep operating, you're going to have to turn something off or risk losing the one piece of equipment keeping this whole thing going.
 
-You call an emergency meeting of the steering committee, but they don't understand. Compressors? Pipes? It's too technical. Everything's working now, why wouldn't it work in the future?. So much for steering committees; it's on you to figure this out.
+You call an emergency meeting of the steering committee, but they don't understand. Compressors? Pipes? It's too technical. Everything's working now, why wouldn't it work in the future? So much for steering committees; it's on you to figure this out.
 
 How do we do anything better here? Is there a way to communicate *more* information with *less* pipes? You and your team are brainstorming, and someone remembers Morse code. That's that thing where people used dots and dashes to communicate over a wire. Could we do the same with compressed air?
 
