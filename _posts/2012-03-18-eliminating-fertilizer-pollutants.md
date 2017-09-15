@@ -30,7 +30,7 @@ the nitrates and eventually purify the tile water. However, this comes with its
 own danger: [algal blooms](http://en.wikipedia.org/wiki/Algal_bloom) can be as
 devastating as the issue they are trying to solve. Think of it as buying a bunch
 of cats to eradicate your mouse problem- you get rid of the mice, but then you have
-to deal with all those damn cats.
+to deal with all those cats.
 
 I proposed a solution involving controlling the algae population in man-made tanks.
 With some basic [reaction kinetics](http://en.wikipedia.org/wiki/Reaction_rate)
