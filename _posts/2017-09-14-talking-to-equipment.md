@@ -5,13 +5,13 @@ layout: post
 permalink: /talking-to-equipment/
 ---
 
-If you're in science or engineering, you've probably used equipment with data ports. In some cases, those ports are connected to nearby computers loaded with proprietary software (that only runs on Windows XP for some reason). When software can't be found, the ports go unused. There's tiny LCD screen displaying a number, and maybe someone writes that number on a piece of paper every hour.
+If you're in science or engineering, you've probably used equipment with data ports. In some cases, those ports are connected to nearby computers loaded with proprietary software (that only runs on Windows XP for some reason). When software can't be found, the ports go unused. There's a tiny LCD screen displaying a number, and maybe someone writes that number on a piece of paper every hour.
 
 ![](/img/science_clipboard.jpg)
 
-There has to be a better way.
+That has to feel wrong.
 
-Fortunately, it only takes a few lines of code to write a functional interface. With the right skills, you could be remotely controlling your equipment in the time it takes you to drink a cup of coffee.
+Fortunately, it only takes a few lines of code to write a functional interface. With the right skills, you could be remotely logging - and even controlling - your equipment in the time it takes you to finish your morning coffee.
 
 Unfortunately, equipment manufacturers are a conservative bunch. Once they have an equipment design that sells, they're not going to revise their design just to keep those data ports modern. This means that learning how to talk to equipment requires familiarity with *decades* worth of older interfaces.
 
