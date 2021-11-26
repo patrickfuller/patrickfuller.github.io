@@ -1,10 +1,8 @@
 ---
 title: New Website
-author: Patrick Fuller
+image: lion_king.png
 layout: post
 permalink: /new-website/
-categories:
-  - Blog
 ---
 
 ![](/img/lion_king.png)

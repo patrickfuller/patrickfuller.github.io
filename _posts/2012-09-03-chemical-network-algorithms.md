@@ -1,11 +1,8 @@
 ---
 title: Chemical Network Algorithms
-author: Patrick Fuller
+image: network.png
 layout: post
 permalink: /chemical-network-algorithms/
-categories:
-  - Coding
-  - Science
 ---
 
 Our lab recently got three papers published in a single issue of Angewandte Chemie

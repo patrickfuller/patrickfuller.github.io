@@ -1,21 +1,8 @@
 ---
 title: Molecules in Blender
-author: Patrick Fuller
+image: penicillin_in_marble.png
 layout: post
-permalink: /molecules-from-smiles-molfiles-in-blender/
-categories:
-  - Blog
-  - Coding
-  - Science
-  - Visualization
-tags:
-  - Blender
-  - Chemical
-  - InChI
-  - Molecules
-  - Molfiles
-  - SMILES
-  - Visualization
+permalink: /molecules-in-blender/
 ---
 
 ![](/img/penicillin_in_marble.png)

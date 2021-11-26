@@ -1,11 +1,8 @@
 ---
 title: 'Images are data - Image processing for scientists and engineers, Part 1'
-author: Patrick Fuller
+image: cell_ratchet.png
 layout: post
-permalink: /images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/
-categories:
-  - Coding
-  - Science
+permalink: /images-are-data/
 ---
 
 The need to extract information from images and videos is a perennial issue in
@@ -224,6 +221,6 @@ it's the same thing we did before with brightness, but much more expressive.
 Take some time to play around with these ideas. A lot of scientific image processing
 can be done with the techniques shown here mixed with a healthy dose of intuition.
 
-In the [next post]({% post_url 2012-11-25-convolution-an-introduction-to-image-processing-for-scientists-and-engineers %}),
+In the [next post]({% post_url 2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers %}),
 I'll tackle image convolution. From there, we'll discuss some of the most
 popular filters.

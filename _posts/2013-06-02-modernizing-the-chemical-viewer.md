@@ -1,12 +1,8 @@
 ---
 title: Modernizing the Chemical Viewer
-author: Patrick Fuller
+image: nu_100_blender.png
 layout: post
 permalink: /modernizing-the-chemical-viewer/
-categories:
-  - Coding
-  - Science
-  - Visualization
 ---
 
 ![](/img/imolecule.png)

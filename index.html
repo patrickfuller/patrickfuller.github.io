@@ -1,13 +1,16 @@
 ---
+title: Home
 layout: default
-title: patrick fuller's blog
 ---
 
 <div id="home">
-  <h1>Blog Posts</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
+  {% for post in site.posts %}
+  <a style="text-decoration: none;" href="{{ post.url }}">
+    <img class="thumbnail" src="img/{{ post.image }}">
+    <p class="thumbnail-text">
+      <span style="font-size: 60%; color: #888;">{{ post.date | date_to_string }}</span><br>
+      {{ post.title }}
+    </p>
+  </a>
+  {% endfor %}
 </div>

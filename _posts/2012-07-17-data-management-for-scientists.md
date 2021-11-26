@@ -1,11 +1,8 @@
 ---
 title: Data Management for Scientists
-author: Patrick Fuller
+image: binary.png
 layout: post
 permalink: /data-management-for-scientists/
-categories:
-  - Coding
-  - Science
 ---
 
 ![](/img/binary.png)

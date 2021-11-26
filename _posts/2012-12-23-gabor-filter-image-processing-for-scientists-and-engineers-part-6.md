@@ -1,11 +1,8 @@
 ---
 title: Gabor Filter – Image processing for scientists and engineers, Part 6
-author: Patrick Fuller
+image: gabor_kernel.png
 layout: post
-permalink: /gabor-filter-image-processing-for-scientists-and-engineers-part-6/
-categories:
-  - Coding
-  - Science
+permalink: /gabor/
 ---
 
 In the last two sections of this tutorial, we discussed
@@ -50,7 +47,7 @@ It adopts the arguments from both the Gaussian and Fourier kernels, so image
 characterization by raw Gabor can be rather time intensive. To circumvent this,
 you commonly see some heuristics applied. In the
 [Gaussian]({% post_url 2012-11-25-gaussian-blur-image-processing-for-scientists-and-engineers-part-4 %})
-section, I talked about using the natural decay of the function to convert kernel 
+section, I talked about using the natural decay of the function to convert kernel
 size into a dependent parameter. Additionally, we can relate the Gaussian decay
 to the wavelength of the Fourier function, removing the `\(\sigma\)` parameter
 entirely. Coding this all up:
@@ -113,7 +110,7 @@ and then some fancy terms (non-maximum suppression and recursive hysteresis) tha
 encode very basic operations (make edges one pixel wide by keeping the strongest
 gradients, and have threshold values to control what is considered an "edge").
 You could build this starting from the
-[gradient lesson]({% post_url 2012-11-25-gradients-image-processing-for-scientists-and-engineers-part-3 %})
+[gradient lesson]({% post_url 2012-11-24-gradients-image-processing-for-scientists-and-engineers-part-3 %})
 (which, on its own, is a decent edge detector), then add in noise-reduction
 pre-processing with a blurring operation, and then tackle the complex sounding
 stuff, if needed.

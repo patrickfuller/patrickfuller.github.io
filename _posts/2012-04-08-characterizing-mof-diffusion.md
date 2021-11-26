@@ -1,11 +1,8 @@
 ---
 title: Characterizing MOF Diffusion
-author: Patrick Fuller
+image: fcs.png
 layout: post
 permalink: /characterizing-mof-diffusion/
-categories:
-  - Blog
-  - Science
 ---
 
 ![](/img/fcs.png)

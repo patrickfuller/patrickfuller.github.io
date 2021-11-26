@@ -1,15 +1,12 @@
 ---
 title: 'Fourier Analysis - Image processing for scientists and engineers, Part 5'
-author: Patrick Fuller
+image: fourier_kernel.png
 layout: post
-permalink: /fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/
-categories:
-  - Coding
-  - Science
+permalink: /fourier/
 ---
 Fourier transforms are something that come up all the time in science, so they're
 worth including here. That being said, they're a lot more specialized than
-[taking gradients]({% post_url 2012-11-25-gradients-image-processing-for-scientists-and-engineers-part-3 %})
+[taking gradients]({% post_url 2012-11-24-gradients-image-processing-for-scientists-and-engineers-part-3 %})
 or [blurring]({% post_url 2012-11-25-gaussian-blur-image-processing-for-scientists-and-engineers-part-4 %})
 an image, so I won't be offended if you gloss over this part.
 

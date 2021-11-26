@@ -1,14 +1,11 @@
 ---
 title: 'Gaussian Blur - Image processing for scientists and engineers, Part 4'
-author: Patrick Fuller
+image: gauss_kernel.png
 layout: post
-permalink: /gaussian-blur-image-processing-for-scientists-and-engineers-part-4/
-categories:
-  - Coding
-  - Science
+permalink: /gaussian-blur/
 ---
 
-Okay, so [we've worked]({% post_url 2012-11-25-convolution-an-introduction-to-image-processing-for-scientists-and-engineers %})
+Okay, so [we've worked]({% post_url 2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers %})
 with pixels and their immediate neighbors, but what about the non-immediate
 neighbors? Easily enough, we can include them by increasing our kernel size.
 The previous 3x3 kernels cover immediate neighbors, 5x5 kernels go two steps

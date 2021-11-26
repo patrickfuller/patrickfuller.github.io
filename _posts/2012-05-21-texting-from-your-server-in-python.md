@@ -1,10 +1,8 @@
 ---
 title: Texting from a Computer in Python
-author: Patrick Fuller
+image: morse.png
 layout: post
 permalink: /texting-from-your-server-in-python/
-categories:
-  - Coding
 ---
 
 Here's a script to send a text message in Python. It uses the standard library and

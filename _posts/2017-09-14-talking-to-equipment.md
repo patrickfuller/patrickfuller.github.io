@@ -1,6 +1,6 @@
 ---
 title: Talking to Equipment
-author: Patrick Fuller
+image: science_clipboard.jpg
 layout: post
 permalink: /talking-to-equipment/
 ---
