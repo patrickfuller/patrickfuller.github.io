@@ -1,6 +1,6 @@
 ---
 title: 'Gaussian Blur - Image processing for scientists and engineers, Part 4'
-image: gauss_kernel.png
+thumbnail: gauss_kernel.png
 layout: post
 permalink: /gaussian-blur/
 ---
@@ -42,7 +42,7 @@ In our previous notation, this looks like a total mess:
 Instead, what you'll usually see is the matrix normalized to [0, 255] and
 represented as an image:
 
-![](/img/gauss_kernel.png)
+![](/assets/2012-11-25-gaussian-blur-image-processing-for-scientists-and-engineers-part-4/gauss_kernel.png)
 
 We'll switch to this notation.
 
@@ -87,7 +87,7 @@ And, by allowing the user to control the sigma parameter, we can control how muc
 the kernel blurs. Below is the image convolved with `\(\sigma\)` = 0.01, 1.0,
 5.0, and 10.0.
 
-![](/img/blurred_rooms.png)
+![](/assets/2012-11-25-gaussian-blur-image-processing-for-scientists-and-engineers-part-4/blurred_rooms.png)
 
 That's basically it, but there are some little tweaks we could add. First, notice
 how the Gaussian naturally tapers out; we can exploit this to functionalize the
@@ -108,7 +108,7 @@ With that kind of logic, large sigma values make bigger kernels, which result
 in more blurring. Here is `\(\sigma = 10\)` again, but with a generated kernel
 size of 69.
 
-![](/img/gauss_room.png)
+![](/assets/2012-11-25-gaussian-blur-image-processing-for-scientists-and-engineers-part-4/gauss_room.png)
 
 To be honest, I just wanted to run the picture through my 3D-izer. You have to
 admit that looks cool.

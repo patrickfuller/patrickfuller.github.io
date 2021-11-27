@@ -1,13 +1,13 @@
 ---
 title: Talking to Equipment
-image: science_clipboard.jpg
+thumbnail: science_clipboard.jpg
 layout: post
 permalink: /talking-to-equipment/
 ---
 
 If you're in science or engineering, you've probably used equipment with data ports. In some cases, those ports are connected to nearby computers loaded with proprietary software (that only runs on Windows XP for some reason). When software can't be found, the ports go unused. There's a tiny LCD screen displaying a number, and maybe someone writes that number on a piece of paper every hour.
 
-![](/img/science_clipboard.jpg)
+![](/assets/2017-09-14-talking-to-equipment/science_clipboard.jpg)
 
 That has to feel wrong.
 
@@ -22,7 +22,7 @@ The Tree of Knowledge
 
 Here's how I like to think about these things. Picture a tree:
 
-![](/img/tree.png)
+![](/assets/2017-09-14-talking-to-equipment/tree.png)
 
 Imagine each of its leaves as a communication protocol. Each leaf is labeled with something you probably haven't heard of before today: *4-20mA*, *0-10V*, *SPI*, *I2C*, *RS-232*, *Modbus RTU*, *Profibus*, *EtherCAT*, *ToolWeb*, *DeviceNet*, *BACNet*, *Modbus TCP*, *UDP*, *HTTP*, and so on. The tree has hundreds of leaves because there are hundreds of protocols.
 
@@ -43,13 +43,13 @@ Scenario
 
 Electronics are hard to visualize. Electrons, current, voltage, and the like aren't tangible and can complicate other concepts. To explain this field, I want to re-imagine electronics as they would be in a post-apocalyptic steampunk world.
 
-![](/img/wire_pipe.png)
+![](/assets/2017-09-14-talking-to-equipment/wire_pipe.png)
 
 Here's the scenario: zombies. The zombies can be styled to your preference (I prefer *Shaun of the Dead*), but the point is things are bad. You're trying to survive.
 
 You and a small group of survivors have built a makeshift camp in an old warehouse. One day, you come across another group living in a warehouse a few miles away. They're friendly, and you decide to work together for your mutual benefit.
 
-![](/img/warehouses.png)
+![](/assets/2017-09-14-talking-to-equipment/warehouses.png)
 
 Your first task is to establish communication. You start sending people to the other warehouse to discuss the day's news. One day, one of the communication parties doesn't come back. There are zombies out there, after all.
 
@@ -60,11 +60,11 @@ There has to be a better way.
 
 While thinking through ways to communicate, you find that many old pipes connect the two warehouses. Maybe you could use those for something?
 
-![](/img/pipes.png)
+![](/assets/2017-09-14-talking-to-equipment/pipes.png)
 
 You look around your commandeered warehouse and find a working air compressor. You think about it for a minute and realize that you could use the compressor to blow air through a pipe. You decide to do this and see what happens. When the day's communication party returns, they report that a pipe in the other warehouse started going berserk. Perfect.
 
-![](/img/one_way.png)
+![](/assets/2017-09-14-talking-to-equipment/one_way.png)
 
 The next day, the communication party tells the other warehouse to label the pipe as HELP. If it's blowing air, it's because you're doing it. And, when that pipe is blowing, it means that they should send help.
 
@@ -76,7 +76,7 @@ This works for your needs, but the other warehouse is getting annoyed at the one
 
 Out of the blue, you think up a brilliant solution. You tell them to put a cap on the end of one of their pipes. Your air compressor will keep that pipe pressurized. If they're in trouble, they can replace the cap with a joint and send the pressurized air *back* through another pipe. This will indicate that they need help. You label the corresponding pipe on your end HELP, and you're in business.
 
-![](/img/relay.png)
+![](/assets/2017-09-14-talking-to-equipment/relay.png)
 
 You've stumbled upon the *relay*. Well done!
 
@@ -84,7 +84,7 @@ Fast forward a couple of months, and you now use relays for *everything*. You st
 
 Like your zombie warehouses, control engineers did the same thing. Once engineers discovered relays, they got used *everywhere*. The reasoning is simple. Relays were the first good-enough solution that people could reliably use to control equipment. Sure, expressive communication required hundreds of wires, but people just bundled them all together.
 
-![](/img/phone_wire.png)
+![](/assets/2017-09-14-talking-to-equipment/phone_wire.png)
 
 Relays are simple, and they're second to none when it comes to speed and reliability.
 
@@ -99,7 +99,7 @@ The problem is that relays can only be off or on. They can't send values. With y
 
 After some time at the drawing board, here's what you come up with: you'll use the *pressure* of the air to send quantitative data. You have valves and pressure gauges kicking around, so you just need to screw these onto the pipes. You're in business. Your compressor provides air at 100 psi, so you set a pressure scale to communicate data. For the PEOPLE pipe, you decide that 0 psi means 0 people, and 100 psi means 1,000 people. It scales linearly between the two. Easy. You do similar things for AMMUNITION, FOOD, WATER (upgrading the old relays here), and it kind of works.
 
-![](/img/pressure.png)
+![](/assets/2017-09-14-talking-to-equipment/pressure.png)
 
 This is good, but pressures on the low end are confusing. Does 0 psi mean that there's no water, or does it mean that they're just not communicating at this moment? You decide to revisit your scale. Now, 10 psi means 0 people, and less than 10 psi means that communication is down — an easy upgrade.
 
@@ -107,7 +107,7 @@ One other issue is that the pressure read on the other side is slightly lower th
 
 On the next iteration, people swap out their pressure gauges for rotameters. You set the scale to 4-20 LPM, and now the other side sees exactly the value you're putting through the pipe. Problem solved.
 
-![](/img/flow.png)
+![](/assets/2017-09-14-talking-to-equipment/flow.png)
 
 You've discovered analog communication. You can now communicate with numbers, which is far more expressive than the simple on-off of relays. Your communication parties no longer go out daily and instead spend their time hanging out with you. You put them out of a job, after all.
 
@@ -126,7 +126,7 @@ You call an emergency meeting of the steering committee, but they don't understa
 
 How do we do anything better here? Is there a way to communicate *more* information with *less* pipes? You and your team are brainstorming, and someone remembers Morse code. That's that thing where people used dots and dashes to communicate over a wire. Could we do the same with compressed air?
 
-![](/img/morse.png)
+![](/assets/2017-09-14-talking-to-equipment/morse.png)
 
 You've just entered the digital age.
 
@@ -136,7 +136,7 @@ The first thing you realize is that dots and dashes are slow. Instead of DOT and
 
 As shorthand, you call OFF "0" and ON "1". Each signal is a "bit." It makes sense to you.
 
-![](/img/digital.png)
+![](/assets/2017-09-14-talking-to-equipment/digital.png)
 
 To start, you want to see if you can fit all of your relays into a single pipe by using this. You have hundreds of active relays, and each is only sending one bit of data. If you can string them all together, i.e., 0100001111011001111, and if the other side knows the order of the bits, then this should work. Hundreds of pipes reduced down to one!
 
@@ -154,7 +154,7 @@ The first annoying part is that communicating the binary protocol is a pain. Wou
 
 You start figuring out what this would look like. You go on to decide that every 8 bits is a "byte." Each byte will encode a single letter. Enough bytes and you have real words.
 
-![](/img/byte.png)
+![](/assets/2017-09-14-talking-to-equipment/byte.png)
 
 You randomly make up an encoding that happens to exactly match [the pre-apocalypse standard of ASCII](http://sticksandstones.kstrom.com/appen.html).
 
@@ -191,7 +191,7 @@ The other warehouse is having a hard time figuring out the speed at which you're
 
 You decide to use a different pipe as a "clock." It'll go 1010101010 so long as it lives and can be used to time the data pipe properly. You can even give the other side control of the clock pipe, so they can switch it when *they* are ready.
 
-![](/img/clock.png)
+![](/assets/2017-09-14-talking-to-equipment/clock.png)
 
 If you want to say "hello," your two pipes now look like:
 
@@ -261,7 +261,7 @@ With this, you also notice that the stop bits are no longer needed. By breaking 
 
 An expedition from a third warehouse finds you, and you discover that they're also connected by pipes. You excitedly tell them about all of your communication development, and they're interested. You implement the same setup with them.
 
-![](/img/small_network.png)
+![](/assets/2017-09-14-talking-to-equipment/small_network.png)
 
 You decide to name the warehouses Alpha, Bravo, and Charlie.
 
@@ -280,11 +280,11 @@ If you receive a message with B or C as a recipient, you copy it down the line.
 
 After organizing this, you meet another warehouse. You call them Delta. Delta tells you that they have pipes connected to two other camps: Echo and Foxtrot. They get on the network, and Foxtrot tells you they're connected to camp Golf, who also wants to join. It seems that some of these camps know further groups. This is getting complicated.
 
-![](/img/large_network.png)
+![](/assets/2017-09-14-talking-to-equipment/large_network.png)
 
 You know the *network topology*, or how people are connected. If you get a message addressed "CG," you know to forward it to Delta. Delta will forward it to Foxtrot, and Foxtrot will finally send it to Golf.
 
-![](/img/routing.png)
+![](/assets/2017-09-14-talking-to-equipment/routing.png)
 
 You can draw this out, but you're starting to realize that this is going to be big. Hundreds, if not thousands, of camps may want to communicate through this network. You need an automatic way to figure out the network topology.
 

@@ -1,0 +1,37 @@
+.thumbnail {
+  display: none;
+  height: 0px;
+}
+.thumbnail-text {
+  text-align: left;
+}
+
+/* Responsive post listing */
+@media (min-width: 48em) {
+  .thumbnail {
+    display: block;
+    float: left;
+    height: 100px;
+    object-fit: cover;
+    width: 175px;
+    margin: 0 10px 25px 0;
+  }
+  .thumbnail-text {
+    height: 100px;
+    margin-bottom: 25px;
+  }
+}
+@media (min-width: 58em) {
+  .thumbnail {
+    display: block;
+    float: left;
+    height: 200px;
+    object-fit: cover;
+    width: 350px;
+    margin: 0 10px 50px 0;
+  }
+  .thumbnail-text {
+    height: 200px;
+    margin-bottom: 50px;
+  }
+}

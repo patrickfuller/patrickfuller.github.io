@@ -1,11 +1,11 @@
 ---
 title: New Website
-image: lion_king.png
+thumbnail: lion_king.png
 layout: post
 permalink: /new-website/
 ---
 
-![](/img/lion_king.png)
+![](/assets/2012-03-18-new-website/lion_king.png)
 
 After pressure from a few people, I decided to take some time to create a blog-based
 website for myself. I have a few goals here. Primarily, I am hoping to contribute

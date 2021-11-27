@@ -1,11 +1,11 @@
 ---
 title: Modernizing the Chemical Viewer
-image: nu_100_blender.png
+thumbnail: nu_100_blender.png
 layout: post
 permalink: /modernizing-the-chemical-viewer/
 ---
 
-![](/img/imolecule.png)
+![](/assets/2013-06-02-modernizing-the-chemical-viewer/nu_100_blender.png)
 
 **tl;dr:** *Check out [this program](http://patrickfuller.github.io/imolecule/).
 If you like source code, [here's the github repo](https://github.com/patrickfuller/imolecule).*

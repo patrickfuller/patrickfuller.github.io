@@ -1,11 +1,11 @@
 ---
 title: Data Management for Scientists
-image: binary.png
+thumbnail: binary.png
 layout: post
 permalink: /data-management-for-scientists/
 ---
 
-![](/img/binary.png)
+![](/assets/2012-07-17-data-management-for-scientists/binary.png)
 
 I've spent the last few months working with the folks at Codecademy to create a
 [tutorial](http://www.codecademy.com/courses/4fa071f79953310003008791?) targeted

@@ -1,6 +1,6 @@
 ---
 title: Chemical Network Algorithms
-image: network.png
+thumbnail: network.png
 layout: post
 permalink: /chemical-network-algorithms/
 ---
@@ -44,7 +44,7 @@ The letters are all placeholders for chemical formulas, which I'm leaving out
 for simplicity. It's short and concise, but this representation doesn't show how
 the reactions interconnect. In network representation, this would look like:
 
-![](/img/network.png)
+![](/assets/2012-09-03-chemical-network-algorithms/network.png)
 
 Here, the green circle nodes represent chemicals and the black diamonds represent
 reactions. I added in the black diamonds to simplify arrows, so it's easier to

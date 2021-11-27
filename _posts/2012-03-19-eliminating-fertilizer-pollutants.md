@@ -1,10 +1,10 @@
 ---
 title: Eliminating Fertilizer Pollutants
-image: scrubber.png
+thumbnail: scrubber.png
 layout: post
 permalink: /eliminating-fertilizer-pollutants/
 ---
-![](/img/scrubber.png)
+![](/assets/2012-03-19-eliminating-fertilizer-pollutants/scrubber.png)
 
 Last summer, I was fortunate enough to become involved with [Innocentive](https://www.innocentive.com/)
 and the [Environmental Defense Fund](http://www.edf.org/), two organizations who

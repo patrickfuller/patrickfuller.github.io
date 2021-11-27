@@ -1,6 +1,6 @@
 ---
 title: 'Images are data - Image processing for scientists and engineers, Part 1'
-image: cell_ratchet.png
+thumbnail: cell_ratchet.png
 layout: post
 permalink: /images-are-data/
 ---
@@ -37,7 +37,7 @@ small-scale science, as color isn't really a thing when you're talking sizes
 smaller than visible light wavelengths (think SEM output and the like). So, as
 an example, here's a grayscale image I took of my living room.
 
-![](/img/living_room.png)
+![](/assets/2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/living_room.png)
 
 Digital images, not surprisingly, are composed of pixels. In the case of black-and-white
 images, each pixel can take an integer value from 0 to 255. 0 is black, 255 is
@@ -67,7 +67,7 @@ short answer: a lot. Let's start with some simple ideas and get coding.
 First, here's a plot of a downsized version of the input image. Take this as our
 starting point - we'll move forward from here.
 
-![](/img/living_room_3d.png)
+![](/assets/2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/living_room_3d.png)
 
 Without any manipulation, you can already see some patterns. The furniture is dark,
 which means that the data in that area will have low values (remember that pure
@@ -135,7 +135,7 @@ This function iterates through the pixels of the living room image. If a pixel i
 dark (ie. if it's furniture), then place a white pixel in the output image.
 Otherwise, place a black pixel. The output looks like this:
 
-![](/img/find_furniture.png)
+![](/assets/2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/find_furniture.png)
 
 All in all, it did a decent job of finding the furniture in the image. We can use
 the same logic to find the lights, now looking for light areas instead of dark ones.
@@ -171,7 +171,7 @@ PImage findLights(PImage img) {
 
 Here, the light in the top left and its window reflection are highlighted.
 
-![](/img/find_light.png)
+![](/assets/2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/find_light.png)
 
 This approach is aptly called *threshold filtering*, and it's super easy. Believe
 it or not, it's enough to solve a lot of image processing dilemmas in science.
@@ -209,7 +209,7 @@ PImage findNuclei(PImage img) {
 
 yields the output
 
-![](/img/cell_ratchet.png)
+![](/assets/2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers/cell_ratchet.png)
 
 One thing to note is that we're now working with color images. This is very
 similar to working with black-and-white images, but now we have even more data!

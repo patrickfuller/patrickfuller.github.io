@@ -11,5 +11,13 @@
       {{ content }}
     </div>
 
-  </body>
+    <script>
+      // Lazy retina.js replacement. The library is not working for me.
+      Array.from(document.images).forEach(image => {
+        image.srcset = image.src.replace('.', '@2x.');
+        image.onerror = () => image.srcset = image.src;
+      });
+    </script>
+
+    </body>
 </html>

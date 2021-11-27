@@ -1,11 +1,11 @@
 ---
 title: 'Convolution - Image processing for scientists and engineers, Part 2'
-image: living_room_3d_convolution.png
+thumbnail: living_room_3d_convolution.png
 layout: post
 permalink: /convolution/
 ---
 
-![](/img/living_room_3d_convolution.png)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/living_room_3d_convolution.png)
 
 In the [first part]({% post_url 2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers %})
 of this tutorial, I covered the basics of image processing - viewing
@@ -98,7 +98,7 @@ for(int x=0; x<img.width; x++) {
 
 produced the following iteration pattern
 
-![](/img/linear.gif)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/linear.gif)
 
 All the logic we could create came from information about these solitary pixels.
 However, most interesting information comes from *groups* of pixels. Most likely,
@@ -123,7 +123,7 @@ for(int x=0; x<img.width; x++) {
 
 and would produce a pattern like
 
-![](/img/convolution.gif)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/convolution.gif)
 
 Here, the blue square represents the center pixel, and iterates in the same pattern
 as before. The green square is the current pixel that the code's inner loop is
@@ -183,7 +183,7 @@ float[][] convolve(float[][] img, float[][] kernel) {
 
 and, when run on this picture of my living room, produces
 
-![](/img/composited_convolution.png)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/composited_convolution.png)
 
 Hmm, that ever so slightly blurred the image. If you think about what we just
 did, that makes sense. Every pixel's value was influenced by its neighbors, so

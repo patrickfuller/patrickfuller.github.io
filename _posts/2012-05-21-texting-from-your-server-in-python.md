@@ -1,6 +1,6 @@
 ---
 title: Texting from a Computer in Python
-image: morse.png
+thumbnail: morse.png
 layout: post
 permalink: /texting-from-your-server-in-python/
 ---
