@@ -2,7 +2,6 @@ title: Patrick Fuller
 image: /img/gauss_kernel.png
 description: Random thoughts on science, software development, and tech entrepreneurship.
 url: http://www.patrickemmettfuller.com
-theme: jekyll-theme-hyde
 kramdown:
   syntax_highlighter_opts:
     block:
