@@ -1,6 +1,6 @@
 ---
 title: Talking to Equipment
-thumbnail: science_clipboard.jpg
+thumbnail: zombie.jpg
 layout: post
 permalink: /talking-to-equipment/
 ---
