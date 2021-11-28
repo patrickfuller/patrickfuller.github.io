@@ -10,6 +10,11 @@ layout: default
 <!-- Disqus comments -->
 <div id="disqus_thread"></div>
 <script>
+    var disqus_config = function () {
+      this.page.url = 'https://patrickemmettfuller.com';
+      this.page.identifier = '{{ page.url }}';
+      this.page.title = '{{ page.title }}';
+    };
     (function() {
         var d = document, s = d.createElement('script');
         s.src = 'https://patrickfuller.disqus.com/embed.js';
