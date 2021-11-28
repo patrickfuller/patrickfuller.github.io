@@ -1,16 +1,71 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-  {% include head.html %}
+  <head>
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+      {% if page.title == "Home" %}
+        {{ site.title }}
+      {% else %}
+        {{ page.title }} &middot; {{ site.title }}
+      {% endif %}
+    </title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" integrity="sha512-P9vJUXK+LyvAzj8otTOKzdfF1F3UYVl13+F8Fof8/2QNb8Twd6Vb+VD52I7+87tex9UXxnzPgWA3rH96RExA7A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  </head>
 
   <body>
 
-    {% include sidebar.html %}
+    <div class="sidebar">
+      <div class="container sidebar-sticky">
+        <div class="sidebar-about">
+          <img src="/assets/index/{{ site.thumbnail }}">
+          <h1>{{ site.title }}</h1>
+          <p>
+            <a href="https://github.com/patrickfuller"><i class="fab fa-github"></i></a>&nbsp;
+            <a href="https://scholar.google.com/citations?user=tGjfnfEAAAAJ&hl=en"><i class="fas fa-flask"></i></a>&nbsp;
+            <a href="https://www.linkedin.com/in/patrickemmettfuller/"><i class="fab fa-linkedin"></i></a>&nbsp;
+            <a href="mailto:patrickfuller@gmail.com"><i class="fas fa-envelope"></i></a>&nbsp;
+          </p>
+          <p>{{ site.description }}</p>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="/">Posts</a>
+          <a class="sidebar-nav-item{% if page.url == '/about/' %} active{% endif %}" href="/about">About</a>
+        </nav>
+
+        <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+      </div>
+    </div>
 
     <div class="content container">
       {{ content }}
     </div>
 
+
+    <!-- Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/fontawesome.min.js" integrity="sha512-ywaT8M9b+VnJ+jNG14UgRaKg+gf8yVBisU2ce+YJrlWwZa9BaZAE5GK5Yd7CBcP6UXoAnziRQl40/u/qwVZi4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       // Lazy retina.js replacement. The library is not working for me.
       Array.from(document.images).forEach(image => {

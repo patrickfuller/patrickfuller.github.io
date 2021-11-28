@@ -1,27 +1,40 @@
-.thumbnail {
-  display: none;
-  height: 0px;
-}
-.thumbnail-text {
-  text-align: left;
+/**
+ * Custom overrides to the installed theme.
+ * Keep these minimal.
+ */
+
+/* Justify all markdown blog posts (but be careful of justifying titles) */
+.content p {
+  text-align: justify;
 }
 
-/* Responsive post listing */
-@media (min-width: 48em) {
-  .thumbnail {
-    display: block;
-    float: left;
-    height: 100px;
-    object-fit: cover;
-    width: 175px;
-    margin: 0 10px 25px 0;
-  }
-  .thumbnail-text {
-    height: 100px;
-    margin-bottom: 25px;
-  }
+/* Tweak the sidebar to make space for an image */
+.sidebar img {
+  margin: auto;
+  max-width: 280px;
+  width: 100%;
 }
-@media (min-width: 58em) {
+.sidebar-about h1 {
+  margin-top: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+}
+
+/* Organize the index.html posts into a responsive list */
+.thumbnail {
+  display: block;
+  float: left;
+  height: 100px;
+  object-fit: cover;
+  width: 175px;
+  margin: 0 10px 25px 0;
+}
+.thumbnail-text {
+  height: 100px;
+  margin-bottom: 25px;
+  text-align: left !important;
+}
+@media (min-width: 68em) {
   .thumbnail {
     display: block;
     float: left;
@@ -36,6 +49,19 @@
   }
 }
 
-.content p {
-  text-align: justify;
+/* Remove spacing and weird theme coloring around inline code */
+code {
+  color: inherit;
+  background: none;
+  padding: 0;
+}
+/* Horizontal scroll long code lines. From https://stackoverflow.com/a/23393920 */
+.highlight pre code * {
+  white-space: nowrap;
+}
+.highlight pre {
+  overflow-x: auto;
+}
+.highlight pre code {
+  white-space: pre;
 }
