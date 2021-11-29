@@ -24,7 +24,8 @@ layout: default
     })();
 </script>
 
-<!-- MathJax LaTeX editor, with edits from https://jekyllrb.com/docs/extras/ -->
+<!-- MathJax LaTeX editor, dynamically loaded based on markdown content -->
+{% if content contains "\(" %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <script type="text/javascript">
   MathJax.Hub.Config({
@@ -39,3 +40,4 @@ layout: default
       }
   });
 </script>
+{% endif %}
