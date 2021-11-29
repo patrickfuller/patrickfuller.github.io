@@ -20,6 +20,10 @@
   font-size: 2.9rem;
 }
 
+.top-posts {
+  margin: 20px 0 0 0;
+}
+
 /* Organize the index.html posts into a responsive list */
 .thumbnail {
   display: block;

@@ -64,7 +64,6 @@ def get_thumbnail_map():
     thumbnail_regex = re.compile(r'thumbnail: (.*)')
     thumbnails = []
     for file in os.listdir(join(ROOT, '_posts')):
-        # post_name = splitext(file)[0]
         with open(join(ROOT, '_posts', file)) as in_file:
             content = in_file.read()
         thumbnails.append(thumbnail_regex.search(content).group(1))
@@ -84,11 +83,14 @@ def compile_images(image_map, thumbnails, dry_run=False):
         if not dry_run:
             for path in paths:
                 copy2(path, dst)
-        if image in thumbnails:
-            paths = compile_thumbnail(image)
-            if not dry_run:
-                for path in paths:
-                    copy2(path, join(ROOT, 'assets/index'))
+    dst = join(ROOT, 'assets/index')
+    for image in thumbnails:
+        if exists(join(dst, image)):
+            continue
+        paths = compile_thumbnail(image)
+        if not dry_run:
+            for path in paths:
+                copy2(path, dst)
     rmtree(tmp_path)
 
 

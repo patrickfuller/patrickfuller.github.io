@@ -55,9 +55,12 @@
         <nav class="sidebar-nav">
           <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="/">Posts</a>
           <a class="sidebar-nav-item{% if page.url == '/about/' %} active{% endif %}" href="/about">About</a>
+          <a class="sidebar-nav-item{% if page.url == '/hiring/' %} active{% endif %}" href="/hiring">Hiring</a>
+          <p class="top-posts">Top Posts</p>
+          <a class="sidebar-nav-item{% if page.url == '/talking-to-equipment/' %} active{% endif %}" href="/talking-to-equipment">Talking to Equipment</a>
+          <a class="sidebar-nav-item{% if page.url == '/images-are-data/' %} active{% endif %}" href="/images-are-data">Image Processing</a>
+          <a class="sidebar-nav-item{% if page.url == '/molecules-in-blender/' %} active{% endif %}" href="/molecules-in-blender">Molecules in Blender</a>
         </nav>
-
-        <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
       </div>
     </div>
 
