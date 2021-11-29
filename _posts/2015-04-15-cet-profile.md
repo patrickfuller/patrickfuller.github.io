@@ -1,5 +1,5 @@
 ---
-title: Clean Energy Trust Profile
+title: Profiled by Clean Energy Trust as a key cleantech innovator
 thumbnail: patrick_cet.jpg
 layout: post
 permalink: /cet-profile/
