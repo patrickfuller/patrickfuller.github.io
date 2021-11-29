@@ -12,11 +12,12 @@ Usage:
 3. Run `python _compile_images.py` to put compiled imaged into `assets`.
 4. Run `jekyll serve` to confirm images have loaded properly.
 """
-import subprocess
+import argparse
 import os
-from os.path import abspath, dirname, join, splitext
+from os.path import abspath, dirname, exists, join, splitext
 import re
 from shutil import copy2, rmtree
+import subprocess
 
 from PIL import Image, UnidentifiedImageError
 
@@ -24,11 +25,11 @@ from PIL import Image, UnidentifiedImageError
 ROOT = dirname(abspath(join(__file__, '..')))
 
 
-def run():
+def run(dry_run=False):
     """Compile images and move to the `assets` folder."""
     image_map = get_image_map()
     thumbnails = get_thumbnail_map()
-    compile_images(image_map, thumbnails)
+    compile_images(image_map, thumbnails, dry_run)
 
 
 def get_image_map():
@@ -41,10 +42,12 @@ def get_image_map():
     """
     image_names = os.listdir(join(ROOT, '_raw_images'))
     image_map = {}
+    front_matter = re.compile(r"^---\n(.+\n)+---\n")
     for file in os.listdir(join(ROOT, '_posts')):
         post_name = splitext(file)[0]
         with open(join(ROOT, '_posts', file)) as in_file:
             content = in_file.read()
+        content = front_matter.sub('', content)
         for image_name in image_names:
             if image_name in content:
                 image_map[image_name] = post_name
@@ -68,20 +71,24 @@ def get_thumbnail_map():
     return thumbnails
 
 
-def compile_images(image_map, thumbnails):
+def compile_images(image_map, thumbnails, dry_run=False):
     """Compile images into multiple resolutions and copy to `assets`."""
     tmp_path = join(ROOT, '_raw_images/tmp')
     os.makedirs(tmp_path, exist_ok=True)
     for image, post in image_map.items():
         dst = join(ROOT, 'assets', post)
+        if exists(join(dst, image)):
+            continue
         os.makedirs(dst, exist_ok=True)
         paths = compile_image(image)
-        for path in paths:
-            copy2(path, dst)
+        if not dry_run:
+            for path in paths:
+                copy2(path, dst)
         if image in thumbnails:
             paths = compile_thumbnail(image)
-            for path in paths:
-                copy2(path, join(ROOT, 'assets/index'))
+            if not dry_run:
+                for path in paths:
+                    copy2(path, join(ROOT, 'assets/index'))
     rmtree(tmp_path)
 
 
@@ -189,4 +196,10 @@ def upscale_old_images():
 
 
 if __name__ == '__main__':
-    run()
+    parser = argparse.ArgumentParser(description="Convert raw images into "
+                                     "multiple resolutions of smaller images "
+                                     "for faster site loading.")
+    parser.add_argument('-d', '--dry-run', action='store_true',
+                        help="Test without copying to assets directory.")
+    args = parser.parse_args()
+    run(dry_run=args.dry_run)
