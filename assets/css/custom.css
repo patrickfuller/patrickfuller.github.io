@@ -8,6 +8,14 @@
   text-align: justify;
 }
 
+/* Hoverable info bubbles */
+.info-bubble {
+  cursor: help;
+  font-size: 60%;
+  position: relative;
+  top: -0.5em;
+}
+
 /* Tweak the sidebar to make space for an image */
 .sidebar img {
   margin: auto;

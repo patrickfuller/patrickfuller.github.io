@@ -1,0 +1,14 @@
+{% comment %}
+This is a readable shim for defining custom markdown syntax.
+Idea from https://alexgude.com/blog/custom-markdown-for-github-pages/
+{% endcomment %}
+
+{% comment %}
+This is a custom markdown to make hoverable asides easier to write.
+{% endcomment %}
+{% assign output = content
+    | replace: 'ⓘ/', '<span class="info-bubble" title="'
+    | replace: '/ⓘ', '">💬</span>'
+%}
+
+{{ output }}

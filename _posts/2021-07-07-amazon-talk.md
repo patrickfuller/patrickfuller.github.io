@@ -11,9 +11,9 @@ I was asked to give a talk about the lessons learned in scaling a "deep tech" co
 
 * We couldn't afford a full lab so negotiated with the landlord to pay for half of a room.
 * We couldn't afford lab equipment so we bought from beer brewers, picklers, and swimming pool manufacturers to get what we needed.
-* We couldn't afford specialists so we all got really good at quickly learning new skills.<span title="I can still build tables out of doors, thread pipes, run electrical, build a stable IT network, and make a decent cappuccino.">ⓘ</span>
+* We couldn't afford specialists so we all got really good at quickly learning new skills. ⓘ/I can still build tables out of doors, thread pipes, run electrical, build a stable IT network, and make a decent cappuccino./ⓘ
 
-I finished up the story by offering advice generated through a slightly unusual prompt. Rather than offering generic guidance, I instead continued the tone of the presentation and focused on where I felt like NuMat mis-stepped early on. If I could send a single index card to myself in 2012, here's what I'd send.<span title="And yes, the back of this card is just the word BITCOIN in thick sharpie.">ⓘ</span>
+I finished up the story by offering advice generated through a slightly unusual prompt. Rather than offering generic guidance, I instead continued the tone of the presentation and focused on where I felt like NuMat mis-stepped early on. If I could send a single index card to myself in 2012, here's what I'd send. ⓘ/And yes, the back of this card is just the word BITCOIN in thick sharpie./ⓘ
 
 ![](/assets/2021-07-07-amazon-talk/numat_cheat_sheet.png)
 
