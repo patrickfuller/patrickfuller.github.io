@@ -62,3 +62,11 @@ If you *really* need to, I’d recommend ensuring the harder metal is the female
 A common practice in connecting two things is to have a mushy bit (aka a gasket). The mushy material will compress to form a gas-tight seal. For pipes, people commonly use [teflon thread tape](https://en.wikipedia.org/wiki/Thread_seal_tape). **Always** apply thread tape before connecting metal pipes!  The only exception is for attaching two plastic fittings, for which tape is not used.
 
 The key here is to keep pulling the thread tape tight as you apply it, and to apply it clockwise ([here’s a youtube video](https://www.youtube.com/watch?v=65i2vGWi3AE)). The NPT standard is to wrap the thread three times.
+
+## Pipes vs. Tubes/Hoses
+
+A *pipe* is thick-walled and rigid, a *tube* is thin-walled, and a *hose* is a reinforced flexible tube. There are weird quirks between pipes and tubes/hoses, which I’ve heard explained as: *a pipe is used to transport something, and a tube is used to construct something*. Keeping this in mind usually explains the quirks.
+
+For example, pipes are generally categorized by inner diameter (ID) and tubes by outer diameter (OD). I explain this as people care about things like pressure drop with pipes (which is calculated by ID), and people care more about fittings/geometry with tubes. Transport is generally eyeballed with tubes (ie. ‘1/4” ID seems reasonable’ instead of doing the math).
+
+With tubes, you're more likely to use specialized fittings such as compression/Swagelok and VCR. Pipes are often threaded in the US and flanged in the EU.
