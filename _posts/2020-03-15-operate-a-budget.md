@@ -1,11 +1,11 @@
 ---
-title: How to operate a project budget
-thumbnail: project_management.png
+title: Project management - Get things done without setting money on fire
+thumbnail: money_fire.jpg
 layout: post
 permalink: /operate-a-budget/
 ---
 
-![](/assets/2020-03-15-operate-a-budget/project_management.png)
+![](/assets/2020-03-15-operate-a-budget/money_fire.jpg)
 
 Many people are thrust into project management without much formal training. It's a field filled with people picking it up as they go. As someone who learned on the job and then had to set up standards at a fledgling company while also operating said companyⓘ/Everyone says it's "a good problem to have"... but it's still a problem!/ⓘ, I have a whole lot of opinions about this field. I'll save them for another day.
 
