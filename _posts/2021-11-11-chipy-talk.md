@@ -2,7 +2,7 @@
 title: Python in nanotech @ ChiPy
 thumbnail: chipy.jpg
 layout: post
-permalink: /chicago-tech/
+permalink: /chipy-talk/
 ---
 
 ![](/assets/2021-11-11-chipy-talk/chipy.jpg)
