@@ -4,7 +4,7 @@
  */
 
 /* Justify all markdown blog posts (but be careful of justifying titles) */
-.content p {
+.content p, .content li {
   text-align: justify;
 }
 
