@@ -12,4 +12,15 @@ Markdown usage: ⓘ/Non-essential comment here./ⓘ
     | replace: '/ⓘ', '</span></span>'
 %}
 
+{% comment %}
+Embed youtube videos into markdown.
+Markdown usage: 🎥/QaKSekjAnqY/🎥
+Custom args: 🎥/QaKSekjAnqY?t=100?🎥
+{% endcomment %}
+{% assign output = output
+    | replace: '🎥/', '<iframe width="720" height="405" src="https://www.youtube.com/embed/'
+    | replace: '/🎥', '?color=white&amp;theme=light">&nbsp;</iframe>'
+    | replace: '?🎥', '&amp;color=white&amp;theme=light">&nbsp;</iframe>'
+%}
+
 {{ output }}
