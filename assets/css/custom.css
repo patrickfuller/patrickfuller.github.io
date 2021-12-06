@@ -9,11 +9,40 @@
 }
 
 /* Hoverable info bubbles */
+/* https://www.w3schools.com/css/css_tooltip.asp */
 .info-bubble {
   cursor: help;
+  display: inline-block;
   font-size: 60%;
   position: relative;
   top: -0.5em;
+}
+.info-bubble .info-text {
+  background-color: #202020;
+  border-radius: 5px;
+  bottom: 100%;
+  color: #fff;
+  left: 50%;
+  margin-left: -100px;
+  padding: 5px;
+  position: absolute;
+  text-align: center;
+  visibility: hidden;
+  width: 200px;
+  z-index: 1;
+}
+.info-bubble:hover .info-text {
+  visibility: visible;
+}
+.info-bubble .info-text::after {
+  border-color: #202020 transparent transparent transparent;
+  border-style: solid;
+  border-width: 5px;
+  content: " ";
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  top: 100%;
 }
 
 /* Tweak the sidebar to make space for an image */

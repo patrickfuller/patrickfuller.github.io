@@ -4,11 +4,12 @@ Idea from https://alexgude.com/blog/custom-markdown-for-github-pages/
 {% endcomment %}
 
 {% comment %}
-This is a custom markdown to make hoverable asides easier to write.
+Make hoverable info bubbles for non-essential comments.
+Markdown usage: ⓘ/Non-essential comment here./ⓘ
 {% endcomment %}
 {% assign output = content
-    | replace: 'ⓘ/', '<span class="info-bubble" title="'
-    | replace: '/ⓘ', '">💬</span>'
+    | replace: 'ⓘ/', '<span class="info-bubble">💬<span class="info-text">'
+    | replace: '/ⓘ', '</span></span>'
 %}
 
 {{ output }}
