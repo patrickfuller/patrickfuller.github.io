@@ -97,6 +97,12 @@
   }
 }
 
+/* Remove spacing and weird theme coloring around inline code and math. */
+code {
+  color: inherit;
+  background: none;
+  padding: 0;
+}
 /* Horizontal scroll long code lines. From https://stackoverflow.com/a/23393920 */
 .highlight pre {
   overflow-x: auto;
