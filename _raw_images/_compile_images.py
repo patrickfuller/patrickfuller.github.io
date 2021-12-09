@@ -9,7 +9,7 @@ Features:
 Usage:
 1. Put hi-res "raw" images into the `_raw_images` directory.
 2. Reference the image names in markdown files within `_posts`.
-3. Run `python _compile_images.py` to put compiled imaged into `assets`.
+3. Run `python _compile_images.py` to read posts and put images into `assets`.
 4. Run `jekyll serve` to confirm images have loaded properly.
 """
 import argparse
