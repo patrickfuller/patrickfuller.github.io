@@ -1,11 +1,11 @@
 ---
 title: Building the boat while sailing it - Getting started as a new project manager
-thumbnail: project_management.png
+thumbnail: project-management.png
 layout: post
 permalink: /project-management/
 ---
 
-![](/assets/2021-12-05-project-management/project_management.png)
+![](/assets/2021-12-05-project-management/project-management.png)
 
 High-performing individual contributors are often promoted into management without prior experience. They've built a reputation as highly capable fast learners and they're expected to pick up the skills on the job.
 

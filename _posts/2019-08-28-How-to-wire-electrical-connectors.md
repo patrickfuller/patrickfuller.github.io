@@ -1,6 +1,6 @@
 ---
 title: How to wire electrical connectors
-thumbnail: uk_plug.jpg
+thumbnail: uk-plug.jpg
 layout: post
 permalink: /electrical-connectors/
 ---

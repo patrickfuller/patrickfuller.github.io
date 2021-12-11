@@ -1,6 +1,6 @@
 ---
 title: Talking about building deep tech with Amazon
-thumbnail: aws_cleantech.jpg
+thumbnail: aws-cleantech.jpg
 layout: post
 permalink: /amazon-talk/
 ---
@@ -15,7 +15,7 @@ I was asked to give a talk about the lessons learned in scaling a "deep tech" co
 
 I finished up the story by offering advice generated through a slightly unusual prompt. Rather than offering generic guidance, I instead continued the tone of the presentation and focused on where I felt like NuMat mis-stepped early on. If I could send a single index card to myself in 2012, here's what I'd send. ⓘ/And yes, the back of this card is just the word BITCOIN in thick sharpie./ⓘ
 
-![](/assets/2021-07-07-amazon-talk/numat_cheat_sheet.png)
+![](/assets/2021-07-07-amazon-talk/numat-cheat-sheet.png)
 
 This is a highly personal list of lessons I learned the hard way through Seed and Series A, but I hope that sharing my stumbling blocks may help others out there.
 

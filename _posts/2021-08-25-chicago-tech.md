@@ -1,11 +1,11 @@
 ---
 title: The Chicago tech ecosystem is mispriced
-thumbnail: wbc_rooftop.jpg
+thumbnail: wbc-rooftop.jpg
 layout: post
 permalink: /chicago-tech/
 ---
 
-![](/assets/2021-08-25-chicago-tech/wbc_rooftop.jpg)
+![](/assets/2021-08-25-chicago-tech/wbc-rooftop.jpg)
 
 It's no secret that Chicago's startup scene is smaller than SF or Boston. In bio/nanotech, you need to look no further than [JLL's 2020 Report](https://www.us.jll.com/en/trends-and-insights/research/life-sciences-real-estate-outlook) to see that the field is dominated by Boston, the Bay Area, the NC Research Triangle, and Scripps. The funding disparity often convinces tech companies to move to the coasts once they "outgrow" the Chicago funding pool.
 

@@ -1,11 +1,11 @@
 ---
 title: Guiding the future of computational materials R&D
-thumbnail: nsf_accelerator.png
+thumbnail: nsf-accelerator.png
 layout: post
 permalink: /nsf-accelerator/
 ---
 
-![](/assets/2021-05-17-nsf-accelerator/nsf_accelerator.png)
+![](/assets/2021-05-17-nsf-accelerator/nsf-accelerator.png)
 
 I was honored to participate in *Accelerating Translational Materials R&D for Global Challenges*, an NSF Convergence Accelerator workshop hosted by IBM Research. This conference focused on guiding government funding and policy to accelerate high-impact projects within computational materials research.
 

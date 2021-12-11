@@ -1,6 +1,6 @@
 ---
 title: Electrical engineering for chemical engineers - Power supplies, how do they work?
-thumbnail: power_supplies_how_do_they_work.jpg
+thumbnail: power-supplies-how-do-they-work.jpg
 layout: post
 permalink: /power-supplies/
 ---
@@ -39,7 +39,7 @@ You could improve this with a series of check valves. Check out this cleverness:
 
 This is called the [diode bridge](https://en.wikipedia.org/wiki/Diode_bridge) and is conceptually at the heart of most AC-DC power supplies. It produces a waveform that looks like this:
 
-![](/assets/2019-08-28-power-supplies/power_supply_diode.gif)
+![](/assets/2019-08-28-power-supplies/power-supply-diode.gif)
 
 It doesn't look pretty, but we now have all the current flowing in the same direction so we can call it DC.
 
@@ -60,7 +60,7 @@ Put your chemical engineer hat back on. Now that you have this pulsating flow, h
 
 A capacitor is the electrical version of a surge tank, smoothing out variations in input. A 10µF capacitor is sized to roughly correspond with AC oscillation frequency, and 0.1µF capacitors ("magic pixie dust" capacitors) are roughly sized to handle high-frequency noise (e.g. radio waves, wifi). Add one and you have an Amazon-worthy power supply:
 
-![](/assets/2019-08-28-power-supplies/power_supply_capacitor.gif)
+![](/assets/2019-08-28-power-supplies/power-supply-capacitor.gif)
 
 Note that this provides a smoother current but doesn't reduce the voltage!
 

@@ -1,6 +1,6 @@
 ---
 title: Gabor Filter – Image processing for scientists and engineers, Part 6
-thumbnail: gabor_kernel.png
+thumbnail: gabor-kernel.png
 layout: post
 permalink: /gabor/
 ---
@@ -16,7 +16,7 @@ information about patterns in the image. So, uh, let's... multiply... them?
 
 Look at that. New filter. When kernel-ized, it looks like:
 
-![](/assets/2012-12-23-gabor-filter-image-processing-for-scientists-and-engineers-part-6/gabor_kernel.png)
+![](/assets/2012-12-23-gabor-filter-image-processing-for-scientists-and-engineers-part-6/gabor-kernel.png)
 
 Its functionality can be summarized by taking the descriptions of the Gaussian
 and Fourier kernels and mashing them together. Something like "finding local

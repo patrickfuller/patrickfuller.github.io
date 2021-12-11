@@ -1,6 +1,6 @@
 ---
 title: Visualizing Scientific Research
-thumbnail: 15_mofs.png
+thumbnail: 15-mofs.png
 layout: post
 permalink: /visualizing-scientific-research/
 ---

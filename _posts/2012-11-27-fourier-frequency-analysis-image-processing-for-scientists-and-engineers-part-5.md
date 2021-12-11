@@ -1,6 +1,6 @@
 ---
 title: 'Fourier Analysis - Image processing for scientists and engineers, Part 5'
-thumbnail: fourier_kernel.png
+thumbnail: fourier-kernel.png
 layout: post
 permalink: /fourier/
 ---
@@ -14,7 +14,7 @@ At their core, Fourier transforms are really simple. Taking the one-dimensional
 example of audio signal processing, let's say you have some music that produces
 noise like this:
 
-![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid_raw.png)
+![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid-raw.png)
 
 This pattern is a sum of sinusoidal waves, each representing the frequency of
 some sound. You'll notice, however, that we don't know any of the frequencies.
@@ -35,7 +35,7 @@ is 0.5, you get random stuff.
 
 `\(\sin{0.5x}*f(x) = \sin{0.5x}\sin{1.2x}+\sin{0.5x}\sin{2.5x}+\sin{0.5x}\sin{6.0x}\)`
 
-![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid_out_of_phase.png)
+![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid-out-of-phase.png)
 
 The result is sometimes positive, and sometimes negative. If you sampled a bunch
 of values and added them up (ie. get the area under the curve), they'd probably
@@ -45,7 +45,7 @@ But, if `\(\omega\)` is 1.2, you get a squared sine term.
 
 `\(\sin{1.2x}*f(x) = \sin^2{1.2x}+\sin{1.2x}\sin{2.5x}+\sin{1.2x}\sin{6.0x}\)`
 
-![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid_in_phase.png)
+![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/sinusoid-in-phase.png)
 
 A sine wave can have positive or negative values, but any real number squared
 is always positive. This makes the sine wave more positive overall. So, if you
@@ -63,11 +63,11 @@ what we were doing with convolution.
 
 So, we can generate a sinusoidal kernel:
 
-![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/fourier_kernel.png)
+![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/fourier-kernel.png)
 
 and convolve the kernel with an image.
 
-![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/fourier_room.png)
+![](/assets/2012-11-27-fourier-frequency-analysis-image-processing-for-scientists-and-engineers-part-5/fourier-room.png)
 
 This doesn't look like much, but there is information here. The peaks in the data
 correspond to areas where the kernel found a pattern. In this case, my IKEA table

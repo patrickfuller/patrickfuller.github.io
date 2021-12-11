@@ -197,11 +197,43 @@ def upscale_old_images():
             subprocess.Popen(upscale, shell=True).wait()
 
 
+def rename_images():
+    """Replace underscores with hyphens in image names.
+
+    Very minor tweak to make images consistent with the permalinks and
+    Jekyll standards.
+    """
+    for path, _, files in os.walk(ROOT):
+        for file in files:
+            is_image = any(file.endswith(ext) for ext in ['jpg', 'png', 'gif'])
+            if is_image and ('_' in file):
+                new = file.replace('_', '-')
+                print(f"Renaming {file} -> {new}")
+                os.rename(os.path.join(path, file), os.path.join(path, new))
+                rename_image_references(file, new)
+
+
+def rename_image_references(old, new):
+    """Loop through posts to rename references to renamed images."""
+    for file in os.listdir(join(ROOT, '_posts')):
+        with open(join(ROOT, '_posts', file)) as in_file:
+            content = in_file.read()
+        if old in content:
+            print(f"Updating {old} in {file}")
+            with open(join(ROOT, '_posts', file), 'w') as out_file:
+                out_file.write(content.replace(old, new))
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Convert raw images into "
                                      "multiple resolutions of smaller images "
                                      "for faster site loading.")
     parser.add_argument('-d', '--dry-run', action='store_true',
                         help="Test without copying to assets directory.")
+    parser.add_argument('-r', '--rename', action='store_true',
+                        help="Run a file renaming script instead.")
     args = parser.parse_args()
-    run(dry_run=args.dry_run)
+    if args.rename:
+        rename_images()
+    else:
+        run(dry_run=args.dry_run)

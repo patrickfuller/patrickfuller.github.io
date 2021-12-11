@@ -1,6 +1,6 @@
 ---
 title: 'Gradients - Image processing for scientists and engineers, Part 3'
-thumbnail: gradient_rooms.png
+thumbnail: gradient-rooms.png
 layout: post
 permalink: /gradients/
 ---
@@ -201,7 +201,7 @@ This function can be run with each of the three gradient-approximation kernels.
 Below is the unedited image (top left), and then the basic (top right), Sobel
 (bottom left), and Scharr (bottom right) kernels.
 
-![](/assets/2012-11-24-gradients-image-processing-for-scientists-and-engineers-part-3/gradient_rooms.png)
+![](/assets/2012-11-24-gradients-image-processing-for-scientists-and-engineers-part-3/gradient-rooms.png)
 
 The basic gradient is the worst of the approximations, but the Sobel and Scharr
 aren't all that different. For this reason, you'll usually see the Sobel operator

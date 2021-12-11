@@ -1,11 +1,11 @@
 ---
 title: 'Convolution - Image processing for scientists and engineers, Part 2'
-thumbnail: living_room_3d_convolution.png
+thumbnail: living-room-3d-convolution.png
 layout: post
 permalink: /convolution/
 ---
 
-![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/living_room_3d_convolution.png)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/living-room-3d-convolution.png)
 
 In the [first part]({% post_url 2012-10-22-images-are-data-an-introduction-to-image-processing-for-scientists-and-engineers %})
 of this tutorial, I covered the basics of image processing - viewing
@@ -183,7 +183,7 @@ float[][] convolve(float[][] img, float[][] kernel) {
 
 and, when run on this picture of my living room, produces
 
-![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/composited_convolution.png)
+![](/assets/2012-11-23-convolution-an-introduction-to-image-processing-for-scientists-and-engineers/composited-convolution.png)
 
 Hmm, that ever so slightly blurred the image. If you think about what we just
 did, that makes sense. Every pixel's value was influenced by its neighbors, so

@@ -1,11 +1,11 @@
 ---
 title: Molecules in Blender
-thumbnail: penicillin_in_marble.png
+thumbnail: penicillin-in-marble.png
 layout: post
 permalink: /molecules-in-blender/
 ---
 
-![](/assets/2012-06-26-molecules-in-blender/penicillin_in_marble.png)
+![](/assets/2012-06-26-molecules-in-blender/penicillin-in-marble.png)
 
 **tl;dr:** *Source code containing all of this and much more can be found
 [on github](https://github.com/patrickfuller/blender-chemicals). Follow the readme
@@ -44,7 +44,7 @@ mug (ie. why I chose this example). It looks like this:
 Next, we download a chemical program (in this case, JMol) and render the structure.
 This gives us:
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_jmol.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-jmol.png)
 
 From here, we make the black background transparent and copy and paste it around
 a coffee mug or something.
@@ -186,7 +186,7 @@ like a feature of Blender. Backwards, I know, but it makes sense when you start
 using it. Start up Blender, click and drag the top right tab to create multiple
 windows, and then select the text editor. Repeat to add in a Python console.
 
-![](/assets/2012-06-26-molecules-in-blender/blender_screenshot.png)
+![](/assets/2012-06-26-molecules-in-blender/blender-screenshot.png)
 
 That's it. You have your Python editor directly in Blender.
 
@@ -234,7 +234,7 @@ draw_molecule(caffeine)
 
 For each atom, we draw a sphere at the specified location.
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_step_one.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-step-one.png)
 
 We're already starting to see the shape of the molecule forming, and we can see
 Blender's awesome rendering capabilities. With nothing more than a few spheres,
@@ -295,7 +295,7 @@ the coordinates of each atom in the bond, and then convert to a magnitude and a
 direction. Size the cylinder by its magnitude, and then rotate to the desired
 direction. Reducing the atom radius to 0.4, we end up with:
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_step_two.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-step-two.png)
 
 It's getting close. Before moving forward, let's add in support for double and
 triple bonds. This will require the ability to translate cylinders orthogonal to
@@ -326,7 +326,7 @@ For single and triple bonds, one cylinder remains unmoved. All other bonds are i
 the direction of the local object axis, with the constants of 1.4 and 2.0 chosen
 as separation values. Adding this results in, well, exactly what you'd expect.
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_step_three.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-step-three.png)
 
 ## Coloring structures
 
@@ -361,7 +361,7 @@ Which will, as you can probably guess, add a material to the active (most recent
 added) object. In the case of bonds, replace `element` with `"bond"`. Doing this
 gives the following result:
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_step_four.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-step-four.png)
 
 That's basically it! Let's add in some final aesthetic touches and generalize sizing spheres so we can use atomic radii.
 
@@ -391,7 +391,7 @@ bpy.ops.mesh.primitive_uv_sphere_add(size=radii[element], location=loc)
 And we're done. Doing this produces our final product. The sizing in this case is
 subtle, but it definitely helps in other examples.
 
-![](/assets/2012-06-26-molecules-in-blender/caffeine_step_five.png)
+![](/assets/2012-06-26-molecules-in-blender/caffeine-step-five.png)
 
 ## In conclusion
 

@@ -7,7 +7,7 @@ permalink: /talking-to-equipment/
 
 If you're in science or engineering, you've probably used equipment with data ports. In some cases, those ports are connected to nearby computers loaded with proprietary software (that only runs on Windows XP for some reason). When software can't be found, the ports go unused. There's a tiny LCD screen displaying a number, and maybe someone writes that number on a piece of paper every hour.
 
-![](/assets/2017-09-14-talking-to-equipment/science_clipboard.jpg)
+![](/assets/2017-09-14-talking-to-equipment/science-clipboard.jpg)
 
 That has to feel wrong.
 
@@ -43,7 +43,7 @@ Scenario
 
 Electronics are hard to visualize. Electrons, current, voltage, and the like aren't tangible and can complicate other concepts. To explain this field, I want to re-imagine electronics as they would be in a post-apocalyptic steampunk world.
 
-![](/assets/2017-09-14-talking-to-equipment/wire_pipe.png)
+![](/assets/2017-09-14-talking-to-equipment/wire-pipe.png)
 
 Here's the scenario: zombies. The zombies can be styled to your preference (I prefer *Shaun of the Dead*), but the point is things are bad. You're trying to survive.
 
@@ -64,7 +64,7 @@ While thinking through ways to communicate, you find that many old pipes connect
 
 You look around your commandeered warehouse and find a working air compressor. You think about it for a minute and realize that you could use the compressor to blow air through a pipe. You decide to do this and see what happens. When the day's communication party returns, they report that a pipe in the other warehouse started going berserk. Perfect.
 
-![](/assets/2017-09-14-talking-to-equipment/one_way.png)
+![](/assets/2017-09-14-talking-to-equipment/one-way.png)
 
 The next day, the communication party tells the other warehouse to label the pipe as HELP. If it's blowing air, it's because you're doing it. And, when that pipe is blowing, it means that they should send help.
 
@@ -84,7 +84,7 @@ Fast forward a couple of months, and you now use relays for *everything*. You st
 
 Like your zombie warehouses, control engineers did the same thing. Once engineers discovered relays, they got used *everywhere*. The reasoning is simple. Relays were the first good-enough solution that people could reliably use to control equipment. Sure, expressive communication required hundreds of wires, but people just bundled them all together.
 
-![](/assets/2017-09-14-talking-to-equipment/phone_wire.png)
+![](/assets/2017-09-14-talking-to-equipment/phone-wire.png)
 
 Relays are simple, and they're second to none when it comes to speed and reliability.
 
@@ -261,7 +261,7 @@ With this, you also notice that the stop bits are no longer needed. By breaking 
 
 An expedition from a third warehouse finds you, and you discover that they're also connected by pipes. You excitedly tell them about all of your communication development, and they're interested. You implement the same setup with them.
 
-![](/assets/2017-09-14-talking-to-equipment/small_network.png)
+![](/assets/2017-09-14-talking-to-equipment/small-network.png)
 
 You decide to name the warehouses Alpha, Bravo, and Charlie.
 
@@ -280,7 +280,7 @@ If you receive a message with B or C as a recipient, you copy it down the line.
 
 After organizing this, you meet another warehouse. You call them Delta. Delta tells you that they have pipes connected to two other camps: Echo and Foxtrot. They get on the network, and Foxtrot tells you they're connected to camp Golf, who also wants to join. It seems that some of these camps know further groups. This is getting complicated.
 
-![](/assets/2017-09-14-talking-to-equipment/large_network.png)
+![](/assets/2017-09-14-talking-to-equipment/large-network.png)
 
 You know the *network topology*, or how people are connected. If you get a message addressed "CG," you know to forward it to Delta. Delta will forward it to Foxtrot, and Foxtrot will finally send it to Golf.
 

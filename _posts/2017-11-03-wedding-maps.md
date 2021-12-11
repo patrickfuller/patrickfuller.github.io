@@ -1,11 +1,11 @@
 ---
 title: Exploring Google Maps API for love and marriage
-thumbnail: wedding_maps.png
+thumbnail: wedding-maps.png
 layout: post
 permalink: /wedding-maps/
 ---
 
-![](/assets/2017-11-03-wedding-maps/wedding_maps.png)
+![](/assets/2017-11-03-wedding-maps/wedding-maps.png)
 
 I recently got married and had seriously the best wedding ever. However, that's not the point.
 
