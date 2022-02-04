@@ -11,7 +11,7 @@ It all started last year, when we had the idea of taking our recent publications
 
 We've been experimenting heavily with Blender so decided to make a snappy 5-minute pitch "deck" based entirely in Blender. Key presses were manually programmed to start and stop animations, leading to something that uniquely felt like a mixture of a movie and a slideshow.
 
-It worked, We presented to NUVention and won for not only our technology but also our style. We also won something that would end up being much more valuable than the prize money - an entry into the student category of the Clean Energy Trust pitch competition.
+It worked. We presented to NUVention and won for not only our technology but also our style. We also won something that would end up being much more valuable than the prize money - an entry into the student category of the Clean Energy Trust pitch competition.
 
 We presented the same slides and ended up [winning a $100,000 prize](https://www.builtinchicago.org/blog/northwestern-university-student-led-company-capture-100000-grand-prizes-clean-energy-challenge-). Similar to NUVention, we learned that the biggest prize was not the cash but the network. The Clean Energy Trust introduced us to even larger competitions.
 

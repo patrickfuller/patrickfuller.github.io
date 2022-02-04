@@ -11,7 +11,7 @@ Back in 2012, I was awarded my first government research grant. I was a 24-year-
 
 This was exciting! Starting a company let me short-circuit the academic career ladder and jumped me a few rungs up to the Assistant Professor stage.
 
-This was also terrifying. Who was I to be in this position? Are they really just going to give me money? And what's all of the acronyms?
+This was also terrifying. Who was I to be in this position? Are they really just going to give me money? And what's with all of the acronyms?
 
 This is a path that many deep tech startup founders must face. As a community, we don't discuss it enough.ⓘ/Most topics I find are about the semantics. They're more "Consider referring your KO to an OTA vehicle to simplify the FAR dependencies of your JE-RDAP" and less "what are we even doing here?"./ⓘ
 
