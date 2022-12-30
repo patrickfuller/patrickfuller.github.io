@@ -13,17 +13,15 @@ Fortunately, there are thousands of great lessons on the internet. You can read 
 
 Unfortunately, you just inherited a new project and team. It'll take you months to absorb enough literature to get up to speed, but your team needs you to act *today*.
 
-What do you do?
+You've just been giving the blueprint to a boat and are being asked to build and sail it at the same time.
 
-I'd like to answer this question today. I've been lucky to be in a position to help multiple new project managers get up to speed and have seen that day-one "everything's on fire" stress many times. You've just been giving the blueprint to a boat and are being asked to build and sail it at the same time.
+What do you do?
 
 I will propose a methodology to get up to speed without blocking your team. First, we need to get you in the right mindset. Second, we need to work through your first day. Finally, we need to get you building the boat while sailing it through a healthy blend of doing and learning.
 
-Let's get started.
-
 ## Your mindset
 
-As a new manager, you may already be letting the title go to your head. You were promoted! You have direct reports! People around you are saying business jargon! Surely, you're on the right track.
+As a new manager, you may already be letting the title go to your head. You were promoted! Surely, you're on the right track.
 
 You should be proud of yourself, but let's slow it down. Take a deep breath and think through what you're now expected to do.
 
@@ -93,9 +91,9 @@ Present it. Make sure everyone leaves the meeting knowing exactly what they need
 
 Giving your team a list of immediate priorities will provide you with breathing room for the next stage.
 
-### Protecting your most valuable resource!
+### Protecting your most valuable resource
 
-As you get into managing your project, you will come to recognize that time is, by far, your most valuable resource. There are plenty of high-quality learning materials on this topic, but there's an important stumbling block to talk about today: the post-kickoff meeting slump.
+As you get into managing your project, you will come to recognize that *time* is, by far, your most valuable resource. There are plenty of high-quality learning materials on this topic, but there's an important stumbling block to talk about today: the post-kickoff meeting slump.
 
 With the team organized, money in the bank account, and months to years ahead, everything's looking great. Without focus, project teams will squander these early weeks with ineffective prioritization and needless work. You'll be kicking yourself a year from now when everything feels like it's on fire.
 

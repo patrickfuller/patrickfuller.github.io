@@ -43,6 +43,6 @@ Never underestimate the skills you don't have. How are you going to segment and 
 
 Are you an MBA student dead-set on being founder and CEO of a deep tech company? Did you find a couple of technical grad students who are willing to give you full control and work for pennies?
 
-Never underestimate the skills you don't have. Technology is the engine of all deep tech companies. You may have the skills to steer the company in the right direction, but your abilities are worthless if nothing happens when you press the accelerator. Do not figure out your engine "along the way" and do not hire inferiors to minimize dilution. If you don't have a technical co-founder who you deeply trust as a peer, you're not ready to start a company.
+Never underestimate the skills you don't have. Technology is the engine of all deep tech companies. You may have the skills to steer the company in the right direction, but your abilities are worthless if nothing happens when you step on the gas. Do not figure out your engine "along the way" and do not hire inferiors to minimize dilution. If you don't have a technical co-founder who you deeply trust as a peer, you're not ready to start a company.
 
 Keep your ego in check and you'll be able to build the rock star founding team needed to turn your vision into reality.
