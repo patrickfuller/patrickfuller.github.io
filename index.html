@@ -5,13 +5,15 @@ layout: default
 
 <div id="home" class="content container">
   {% for post in site.posts %}
-  <a style="text-decoration: none;" href="{{ post.url }}">
-    <img class="thumbnail" src="/assets/index/{{ post.thumbnail }}">
-    <p class="thumbnail-text">
-      {{ post.title }}
-      <br>
-      <span style="font-size: 60%; color: #888;">{{ post.date | date_to_string }}</span>
-    </p>
-  </a>
+  <div class="thumbnail">
+    <a href="{{ post.url }}">
+      <img src="/assets/index/{{ post.thumbnail }}">
+      <p>
+        {{ post.title }}
+        <br>
+        <span class="thumbnail-date">{{ post.date | date_to_string }}</span>
+      </p>
+    </a>
+  </div>
   {% endfor %}
 </div>

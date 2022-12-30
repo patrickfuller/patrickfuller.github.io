@@ -70,27 +70,44 @@
 
 /* Organize the index.html posts into a responsive list */
 .thumbnail {
+  border: 3px solid #fff;
+  border-radius: 10px;
+  height: 110px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.thumbnail:hover {
+  background: #eee;
+  cursor: pointer;
+}
+.thumbnail > a {
+  color: #333;
+  text-decoration: none;
+}
+.thumbnail img {
+  border-radius: 5px;
   display: block;
   float: left;
-  height: 100px;
+  height: 100%;
+  margin-right: 10px;
   object-fit: cover;
-  width: 175px;
-  margin: 0 10px 25px 0;
 }
-.thumbnail-text {
-  height: 100px;
-  margin-bottom: 25px;
+.thumbnail p {
+  margin-bottom: 0;
   text-align: left !important;
 }
-@media (min-width: 68em) {
+.thumbnail-date {
+  color: #888;
+  font-size: 60%;
+}
+@media (min-width: 64em) {
   .thumbnail {
-    height: 200px;
-    width: 350px;
-    margin: 0 10px 50px 0;
-  }
-  .thumbnail-text {
-    height: 200px;
+    height: 230px;
     margin-bottom: 50px;
+    padding: 15px;
+  }
+  .thumbnail img {
+    margin-right: 20px;
   }
 }
 
